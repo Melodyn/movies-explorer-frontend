@@ -1,9 +1,18 @@
-@import './vendor/normalize.css';
-@import './vendor/inter.css';
+@import url('./vendor/normalize.css');
+@import url('./vendor/inter.css');
 
-body {
-  margin: 0;
+.page {
+  display: flex;
+  width: 100%;
+  min-width: 320px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0 auto;
+  background-color: white;
   font-family:
+    Inter,
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
@@ -15,16 +24,53 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
+  font-size: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
 }
 
-code {
-  font-family:
-    source-code-pro,
-    Menlo,
-    Monaco,
-    Consolas,
-    'Courier New',
-    monospace;
+.button {
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  margin: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button_bg_accent {
+  background-color: rgba(43 224 128 / 100%);
+}
+
+.button_bg_accent:hover {
+  background-color: rgba(43 224 128 / 80%);
+}
+
+.button_bg_light {
+  background-color: rgba(249 249 249 / 100%);
+}
+
+.button_bg_light:hover {
+  background-color: rgba(249 249 249 / 80%);
+}
+
+.button_bg_gray {
+  background-color: rgba(232 232 232 / 100%);
+}
+
+.button_bg_gray:hover {
+  background-color: rgba(232 232 232 / 80%);
+}
+
+.animation {
+  opacity: 1;
+  transition: .3s;
+}
+
+.animation:hover {
+  opacity: .7;
 }

@@ -1,27 +1,83 @@
-import logo from '../../logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 export const App = () => {
+  const [hello] = useState('На главную');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
+    <>
+      <header className="header">
         <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          href="/"
+          className="animation logo"
+          aria-label={hello}
+        />
+
+        <nav className="navigation">
+          <ul className="navigation-links navigation-links_type_menu">
+            <li>
+              <a
+                href="/"
+                className="navigation-link"
+              >
+                Фильмы
+              </a>
+            </li>
+            <li>
+              <a
+                href="/"
+                className="animation navigation-link navigation-link_inactive"
+              >
+                Сохранённые фильмы
+              </a>
+            </li>
+          </ul>
+
+          <ul className="navigation-links navigation-links_type_profile">
+            <li>
+              <a
+                href="/"
+                className="animation navigation-link"
+              >
+                Регистрация
+              </a>
+            </li>
+            <li>
+              <button
+                className="button button_bg_accent navigation-link navigation-link_type_login"
+                type="button"
+              >
+                Войти
+              </button>
+            </li>
+            <li>
+              <button
+                className="button button_bg_light navigation-link navigation-link_type_account"
+                type="button"
+              >
+                Аккаунт
+              </button>
+            </li>
+            <li>
+              <button
+                className="button navigation-link navigation-link_type_burger"
+                type="button"
+                aria-label="Открыть меню"
+              />
+            </li>
+          </ul>
+        </nav>
       </header>
-    </div>
+
+      <main className="main">
+        <article className="cover">
+          <h1 className="cover__text">Дипломный&nbsp;проект студента&nbsp;веб-разработки</h1>
+          <div className="cover__buttons">
+            <button type="button" className="button button_bg_gray cover__button">О проекте</button>
+            <button type="button" className="button button_bg_gray cover__button">Технологии</button>
+            <button type="button" className="button button_bg_gray cover__button">Студент</button>
+          </div>
+        </article>
+      </main>
+    </>
   );
 };

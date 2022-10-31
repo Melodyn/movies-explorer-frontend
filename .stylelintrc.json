@@ -23,6 +23,7 @@
           "blockless-after-blockless"
         ]
       }
-    ]
+    ],
+    "no-empty-source": null
   }
 }
