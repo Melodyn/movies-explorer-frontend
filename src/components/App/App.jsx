@@ -70,11 +70,13 @@ export const App = () => {
 
       <main className="main">
         <article className="cover">
-          <h1 className="cover__text">Дипломный&nbsp;проект студента&nbsp;веб-разработки</h1>
-          <div className="cover__buttons">
-            <button type="button" className="button button_bg_gray cover__button">О проекте</button>
-            <button type="button" className="button button_bg_gray cover__button">Технологии</button>
-            <button type="button" className="button button_bg_gray cover__button">Студент</button>
+          <div className="cover__container">
+            <h1 className="cover__text">Дипломный проект студента факультета веб-разработки</h1>
+            <div className="cover__buttons">
+              <button type="button" className="button button_bg_gray cover__button">О проекте</button>
+              <button type="button" className="button button_bg_gray cover__button">Технологии</button>
+              <button type="button" className="button button_bg_gray cover__button">Студент</button>
+            </div>
           </div>
         </article>
       </main>
