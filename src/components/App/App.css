@@ -38,6 +38,8 @@
   margin: 0;
 }
 
+/* navigation */
+
 .navigation {
   display: flex;
   width: 100%;
@@ -80,7 +82,7 @@
   font-size: 13px;
 }
 
-.navigation-link_inactive {
+.navigation-links_type_menu .navigation-link_inactive {
   font-weight: 400;
 }
 
@@ -96,9 +98,96 @@
 }
 
 .navigation-link_type_burger {
+  display: none;
   width: 44px;
   height: 44px;
   background-image: url('../../images/burger.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.navigation_place_header {
+  flex-direction: row;
+}
+
+.navigation-links_type_popup {
+  flex-direction: column;
+  gap: 28px;
+}
+
+.navigation-links_type_popup .navigation-link {
+  font-size: 18px;
+}
+
+.navigation-links_type_popup .navigation-link_active {
+  text-decoration: underline 2px;
+  text-underline-offset: 6px;
+}
+
+@media screen and (max-width: 879px) {
+  .header {
+    justify-content: space-between;
+  }
+
+  .navigation_place_header {
+    display: none;
+  }
+
+  .navigation-link_type_burger {
+    display: block;
+  }
+}
+
+.popup {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0 0 0 / 30%);
+  opacity: 0;
+  transition: .3s;
+  visibility: hidden;
+}
+
+.popup_opened {
+  opacity: 1;
+  transition: .3s;
+  visibility: visible;
+}
+
+.popup__container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
+}
+
+.popup__content {
+  display: flex;
+  width: 100%;
+  min-width: 320px;
+  max-width: 520px;
+  height: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  padding: 90px;
+  margin: 0;
+  background-color: white;
+}
+
+.popup__close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 36px;
+  height: 36px;
+  background-image: url('../../images/close.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -174,6 +263,21 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0 24px;
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .popup__content {
+    padding: 144px 14px 46px;
+  }
+
+  .popup__close {
+    top: 14px;
+    right: 14px;
+  }
+
+  .navigation-links_type_popup {
+    gap: 24px;
   }
 }
 

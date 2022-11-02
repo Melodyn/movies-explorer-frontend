@@ -12,7 +12,13 @@ export const App = () => {
           aria-label={hello}
         />
 
-        <nav className="navigation">
+        <button
+          className="button navigation-link navigation-link_type_burger"
+          type="button"
+          aria-label="Открыть меню"
+        />
+
+        <nav className="navigation navigation_place_header">
           <ul className="navigation-links navigation-links_type_menu">
             <li>
               <a
@@ -57,13 +63,6 @@ export const App = () => {
                 Аккаунт
               </button>
             </li>
-            <li>
-              <button
-                className="button navigation-link navigation-link_type_burger"
-                type="button"
-                aria-label="Открыть меню"
-              />
-            </li>
           </ul>
         </nav>
       </header>
@@ -80,6 +79,55 @@ export const App = () => {
           </div>
         </article>
       </main>
+
+      <div className="popup popup_type_navigation popup_opened">
+        <div className="popup__container">
+          <button
+            className="button animation popup__close"
+            type="button"
+            aria-label="Закрыть"
+          />
+          <nav className="navigation navigation_place_popup popup__content">
+            <ul className="navigation-links navigation-links_type_popup">
+              <li>
+                <a
+                  href="/"
+                  className="navigation-link navigation-link_active"
+                >
+                  Главная
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/"
+                  className="navigation-link"
+                >
+                  Фильмы
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/"
+                  className="animation navigation-link"
+                >
+                  Сохранённые фильмы
+                </a>
+              </li>
+            </ul>
+
+            <ul className="navigation-links navigation-links_type_profile">
+              <li>
+                <button
+                  className="button button_bg_light navigation-link navigation-link_type_account"
+                  type="button"
+                >
+                  Аккаунт
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </>
   );
 };
