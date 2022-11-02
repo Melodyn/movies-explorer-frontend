@@ -1,0 +1,105 @@
+.navigation {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation_place_navtab {
+  flex-direction: column;
+}
+
+.navigation_place_header {
+  flex-direction: row;
+}
+
+.navigation_type_compact {
+  display: flex;
+}
+
+.navigation-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.navigation-links_type_menu {
+  gap: 16px;
+}
+
+.navigation-links_type_profile {
+  gap: 30px;
+}
+
+.navigation-links_type_navtab {
+  flex-direction: column;
+  gap: 28px;
+}
+
+.navigation-link {
+  padding: 0;
+  margin: 0;
+  color: black;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.navigation-links_type_menu .navigation-link {
+  font-size: 13px;
+}
+
+.navigation-links_type_menu .navigation-link_inactive {
+  font-weight: 400;
+}
+
+.navigation-links_type_navtab .navigation-link {
+  font-size: 18px;
+}
+
+.navigation-links_type_navtab .navigation-link_active {
+  text-decoration: underline 2px;
+  text-underline-offset: 6px;
+}
+
+.navigation-link_type_login {
+  padding: 8px 20px;
+  border-radius: 3px;
+}
+
+.navigation-link_type_account {
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.navigation-link_type_burger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  background-image: url('../../images/burger.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+@media screen and (max-width: 879px) {
+  .navigation_type_compact {
+    display: none;
+  }
+
+  .navigation-link_type_burger {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .navigation-links_type_navtab {
+    gap: 24px;
+  }
+}
