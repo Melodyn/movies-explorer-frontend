@@ -1,10 +1,10 @@
 import './Promo.css';
 
 export const Promo = ({ onClickAuth }) => (
-  <article className="promo">
+  <article className="article promo">
     <div className="promo__container">
       <h1 className="promo__text">
-        Дипломный проект студента факультета веб-разработки
+        Присаживайся у лампы и да настанет время мемных историй!
         <br />
         <button
           type="button"
@@ -15,12 +15,12 @@ export const Promo = ({ onClickAuth }) => (
         </button>
       </h1>
       <div className="promo__buttons">
-        <button
-          type="button"
-          className="button button_bg_gray promo__button"
+        <a
+          href="#about-project"
+          className="button button_bg_gray promo__button promo__button_type_link"
         >
-          О проекте
-        </button>
+          <span className="promo__button-text">О проекте</span>
+        </a>
         <button
           type="button"
           className="button button_bg_gray promo__button"

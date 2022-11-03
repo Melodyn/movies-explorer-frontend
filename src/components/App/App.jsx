@@ -4,6 +4,7 @@ import { Header } from '../Header/Header';
 import { Main } from '../Main/Main';
 import { Promo } from '../Main/Promo/Promo';
 import { NavTab } from '../Main/NavTab/NavTab';
+import { AboutProject } from '../Main/AboutProject/AboutProject';
 
 export const App = () => {
   const [isAuthorized, setAuthorized] = useState(false);
@@ -18,6 +19,7 @@ export const App = () => {
 
       <Main>
         <Promo onClickAuth={() => setAuthorized(!isAuthorized)} />
+        <AboutProject />
       </Main>
 
       <NavTab

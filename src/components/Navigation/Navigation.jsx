@@ -40,7 +40,7 @@ export const Navigation = ({ isAuthorized, place }) => {
                 href="/"
                 className="navigation-link"
               >
-                Фильмы
+                Все роллы
               </a>
             </li>
             <li>
@@ -48,7 +48,7 @@ export const Navigation = ({ isAuthorized, place }) => {
                 href="/"
                 className="animation navigation-link navigation-link_inactive"
               >
-                Сохранённые фильмы
+                Запечённые роллы
               </a>
             </li>
           </>
