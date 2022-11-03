@@ -16,8 +16,14 @@
   box-sizing: border-box;
   flex-direction: row;
   align-items: center;
-  padding: 18px 30px;
+  padding: 18px 70px;
   margin: 0;
+}
+
+@media screen and (max-width: 1239px) {
+  .header {
+    padding: 18px 30px;
+  }
 }
 
 @media screen and (max-width: 879px) {
