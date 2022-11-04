@@ -126,6 +126,14 @@
   content: '';
 }
 
+/* tmp */
+.footer {
+  height: 100px;
+  background-color: white;
+}
+
+/* media */
+
 @media screen and (max-width: 879px) {
   .article {
     padding: 90px 50px;
