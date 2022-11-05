@@ -2,7 +2,7 @@ import './Promo.css';
 
 export const Promo = ({ onClickAuth }) => (
   <article className="article promo">
-    <div className="promo__container">
+    <section className="promo__container">
       <h1 className="promo__text">
         Присаживайся у лампы и да настанет время мемных историй!
         <br />
@@ -34,6 +34,6 @@ export const Promo = ({ onClickAuth }) => (
           <span className="promo__button-text">Автор</span>
         </a>
       </div>
-    </div>
+    </section>
   </article>
 );

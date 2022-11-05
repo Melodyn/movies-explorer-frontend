@@ -1,0 +1,38 @@
+import './Footer.css';
+
+export const Footer = () => (
+  <footer className="article footer">
+    <section className="footer__container">
+      <p className="footer__about">
+        Никакие права не защищены, все обязанности даны
+      </p>
+      <div className="footer__info">
+        <span className="footer__year">
+          &copy; 2022
+        </span>
+        <ul className="footer__links">
+          <li>
+            <a
+              href="https://melodyn.ru"
+              className="footer__link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Сергей Мелодин
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/melodyn"
+              className="footer__link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Github
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </footer>
+);

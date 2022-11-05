@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Header } from '../Header/Header';
 import { Main } from '../Main/Main';
 import { NavTab } from '../Main/NavTab/NavTab';
+import { Footer } from '../Footer/Footer';
 
 export const App = () => {
   const [isAuthorized, setAuthorized] = useState(false);
@@ -23,7 +24,7 @@ export const App = () => {
         onClose={() => setIsNavtabOpened(false)}
       />
 
-      <footer className="footer" />
+      <Footer />
     </>
   );
 };
