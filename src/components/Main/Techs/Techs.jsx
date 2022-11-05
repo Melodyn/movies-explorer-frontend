@@ -6,7 +6,7 @@ export const Techs = () => (
     <section className="techs__description">
       <h2 className="techs__header">7 технологий</h2>
       <p className="techs__text">
-        Чтобы тупые шуточки оценили только умные друзья иы используем современные высокие технологии:
+        Чтобы тупые шуточки оценили только умные друзья мы используем современные высокие технологии:
       </p>
     </section>
     <ul className="techs__items">

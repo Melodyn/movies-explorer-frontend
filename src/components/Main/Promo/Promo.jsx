@@ -8,7 +8,7 @@ export const Promo = ({ onClickAuth }) => (
         <br />
         <button
           type="button"
-          className="button button_bg_gray promo__button"
+          className="button button_bg_gray promo__button promo__button_type_button"
           onClick={onClickAuth}
         >
           &#127770;
@@ -17,22 +17,22 @@ export const Promo = ({ onClickAuth }) => (
       <div className="promo__buttons">
         <a
           href="#about-project"
-          className="button button_bg_gray promo__button promo__button_type_link"
+          className="button button_bg_gray promo__button"
         >
           <span className="promo__button-text">О проекте</span>
         </a>
         <a
           href="#techs"
-          className="button button_bg_gray promo__button promo__button_type_link"
+          className="button button_bg_gray promo__button"
         >
           <span className="promo__button-text">Технологии</span>
         </a>
-        <button
-          type="button"
+        <a
+          href="#about-me"
           className="button button_bg_gray promo__button"
         >
-          Студент
-        </button>
+          <span className="promo__button-text">Автор</span>
+        </a>
       </div>
     </div>
   </article>
