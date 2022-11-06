@@ -1,5 +1,8 @@
 import './Navigation.css';
 import cn from 'classnames';
+import {
+  Link,
+} from 'react-router-dom';
 
 export const Navigation = ({ isAuthorized, place }) => {
   const isNavtab = (place === 'navtab');
@@ -27,29 +30,29 @@ export const Navigation = ({ isAuthorized, place }) => {
           <>
             {isNavtab && (
               <li>
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="navigation-link navigation-link_active"
                 >
                   Главная
-                </a>
+                </Link>
               </li>
             )}
             <li>
-              <a
-                href="/"
+              <Link
+                to="/movies"
                 className="navigation-link"
               >
                 Все роллы
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/"
+              <Link
+                to="/saved-movies"
                 className="animation navigation-link navigation-link_inactive"
               >
                 Запечённые роллы
-              </a>
+              </Link>
             </li>
           </>
         )}
@@ -59,31 +62,31 @@ export const Navigation = ({ isAuthorized, place }) => {
         {!isAuthorized && (
           <>
             <li>
-              <a
-                href="/"
+              <Link
+                to="/signup"
                 className="animation navigation-link"
               >
                 Регистрация
-              </a>
+              </Link>
             </li>
             <li>
-              <button
+              <Link
+                to="/signin"
                 className="button button_bg_accent navigation-link navigation-link_type_login"
-                type="button"
               >
                 Войти
-              </button>
+              </Link>
             </li>
           </>
         )}
         {isAuthorized && (
           <li>
-            <button
+            <Link
+              to="/profile"
               className="button button_bg_light navigation-link navigation-link_type_account"
-              type="button"
             >
               Аккаунт
-            </button>
+            </Link>
           </li>
         )}
       </ul>

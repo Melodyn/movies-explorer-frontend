@@ -1,10 +1,13 @@
 import './Header.css';
+import {
+  Link,
+} from 'react-router-dom';
 import { Navigation } from '../Navigation/Navigation';
 
 export const Header = ({ isAuthorized, onClickBurger }) => (
   <header className="header">
-    <a
-      href="/"
+    <Link
+      to="/"
       className="animation logo"
       aria-label="На главную"
     />

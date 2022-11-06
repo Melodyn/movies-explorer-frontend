@@ -14,7 +14,7 @@ export const Footer = () => (
           <li>
             <a
               href="https://melodyn.ru"
-              className="footer__link"
+              className="animation footer__link"
               target="_blank"
               rel="noreferrer"
             >
@@ -24,7 +24,7 @@ export const Footer = () => (
           <li>
             <a
               href="https://github.com/melodyn"
-              className="footer__link"
+              className="animation footer__link"
               target="_blank"
               rel="noreferrer"
             >
