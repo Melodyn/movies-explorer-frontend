@@ -29,7 +29,7 @@ export const AboutMe = () => (
       </div>
       <figure className="two-columns__column about-me__column about-me__image-container">
         <img
-          src="https://wallpapers.com/images/high/green-pepe-the-frog-fg4lqx6qcab6sybv-fg4lqx6qcab6sybv.webp"
+          src="../../../images/pepe-photo.png"
           className="two-columns__column about-me__column about-me__image"
           alt="Аватар"
         />

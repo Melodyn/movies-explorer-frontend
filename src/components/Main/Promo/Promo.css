@@ -13,8 +13,8 @@
   border-radius: 10px;
   margin: 0;
   background-color: #f5f5f5;
-  background-image: url('https://attachments.f95zone.to/2020/07/745512_feelsbadman-pepe-meme-memes-wallpaper-preview.jpg');
-  background-position: center;
+  background-image: url('../../../images/pepe-promo.jpg');
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -78,6 +78,10 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0 24px;
+  }
+
+  .promo__container {
+    background-position: center;
   }
 }
 

@@ -35,5 +35,6 @@ export const SearchForm = () => (
         </div>
       </fieldset>
     </form>
+    <hr className="search-delimiter" />
   </article>
 );

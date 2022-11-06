@@ -26,7 +26,11 @@ export const NavTab = ({ isAuthorized, isOpen, onClose }) => {
           onClick={onClose}
         />
 
-        <Navigation isAuthorized={isAuthorized} place="navtab" />
+        <Navigation
+          isAuthorized={isAuthorized}
+          place="navtab"
+          onClick={onClose}
+        />
       </div>
     </div>
   );

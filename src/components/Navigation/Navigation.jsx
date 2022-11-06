@@ -4,7 +4,7 @@ import {
   Link,
 } from 'react-router-dom';
 
-export const Navigation = ({ isAuthorized, place }) => {
+export const Navigation = ({ isAuthorized, place, onClick }) => {
   const isNavtab = (place === 'navtab');
   const navClassName = cn(
     'navigation',
@@ -33,6 +33,7 @@ export const Navigation = ({ isAuthorized, place }) => {
                 <Link
                   to="/"
                   className="navigation-link navigation-link_active"
+                  onClick={onClick}
                 >
                   Главная
                 </Link>
@@ -42,6 +43,7 @@ export const Navigation = ({ isAuthorized, place }) => {
               <Link
                 to="/movies"
                 className="navigation-link"
+                onClick={onClick}
               >
                 Все роллы
               </Link>
@@ -50,6 +52,7 @@ export const Navigation = ({ isAuthorized, place }) => {
               <Link
                 to="/saved-movies"
                 className="animation navigation-link navigation-link_inactive"
+                onClick={onClick}
               >
                 Запечённые роллы
               </Link>
@@ -84,6 +87,7 @@ export const Navigation = ({ isAuthorized, place }) => {
             <Link
               to="/profile"
               className="button button_bg_light navigation-link navigation-link_type_account"
+              onClick={onClick}
             >
               Аккаунт
             </Link>

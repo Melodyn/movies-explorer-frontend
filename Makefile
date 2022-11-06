@@ -6,8 +6,8 @@ install-dependencies:
 	npm ci
 
 lint:
-	npx stylelint "./src/**/*.css"
-	npx eslint --ext .js,.jsx ./src
+	npx stylelint --fix "./src/**/*.css"
+	npx eslint --fix --ext .js,.jsx ./src
 
 run:
 	npm run start
