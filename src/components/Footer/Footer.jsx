@@ -4,7 +4,7 @@ export const Footer = () => (
   <footer className="article footer">
     <section className="footer__container">
       <p className="footer__about">
-        Никакие права не защищены, все обязанности даны
+        Никакие права не&nbsp;защищены, все&nbsp;обязанности&nbsp;даны
       </p>
       <div className="footer__info">
         <span className="footer__year">
