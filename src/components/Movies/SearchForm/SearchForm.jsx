@@ -3,7 +3,7 @@
 import './SearchForm.css';
 
 export const SearchForm = () => (
-  <article className="article search">
+  <article className="article search" aria-label="Поиск роллов">
     <form action="/" name="search" className="search__form">
       <fieldset className="search__fields search__fields_type_film">
         <label className="search-film__label" htmlFor="film" />

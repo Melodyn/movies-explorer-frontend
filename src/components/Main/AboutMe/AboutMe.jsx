@@ -1,4 +1,5 @@
 import './AboutMe.css';
+import pepePhoto from '../../../images/pepe-photo.png';
 import { Portfolio } from '../Portfolio/Portfolio';
 
 export const AboutMe = () => (
@@ -29,7 +30,7 @@ export const AboutMe = () => (
       </div>
       <figure className="two-columns__column about-me__column about-me__image-container">
         <img
-          src="../../../images/pepe-photo.png"
+          src={pepePhoto}
           className="two-columns__column about-me__column about-me__image"
           alt="Аватар"
         />

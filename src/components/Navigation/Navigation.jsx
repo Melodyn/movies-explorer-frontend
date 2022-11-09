@@ -2,9 +2,15 @@ import './Navigation.css';
 import cn from 'classnames';
 import {
   Link,
+  useLocation,
 } from 'react-router-dom';
 
 export const Navigation = ({ isAuthorized, place, onClick }) => {
+  const location = useLocation();
+  const isLocationMain = (location.pathname === '/');
+  const isLocationMovies = !isLocationMain && (location.pathname === '/movies');
+  const isLocationSavedMovies = !isLocationMain && location.pathname.includes('saved');
+
   const isNavtab = (place === 'navtab');
   const navClassName = cn(
     'navigation',
@@ -32,7 +38,13 @@ export const Navigation = ({ isAuthorized, place, onClick }) => {
               <li>
                 <Link
                   to="/"
-                  className="navigation-link navigation-link_active"
+                  className={cn(
+                    'navigation-link',
+                    {
+                      animation: !isLocationMain,
+                      'navigation-link_active': isLocationMain,
+                    },
+                  )}
                   onClick={onClick}
                 >
                   Главная
@@ -42,7 +54,13 @@ export const Navigation = ({ isAuthorized, place, onClick }) => {
             <li>
               <Link
                 to="/movies"
-                className="navigation-link"
+                className={cn(
+                  'navigation-link',
+                  {
+                    animation: !isLocationMovies,
+                    'navigation-link_active': isLocationMovies,
+                  },
+                )}
                 onClick={onClick}
               >
                 Все роллы
@@ -51,7 +69,13 @@ export const Navigation = ({ isAuthorized, place, onClick }) => {
             <li>
               <Link
                 to="/saved-movies"
-                className="animation navigation-link navigation-link_inactive"
+                className={cn(
+                  'navigation-link',
+                  {
+                    animation: !isLocationSavedMovies,
+                    'navigation-link_active': isLocationSavedMovies,
+                  },
+                )}
                 onClick={onClick}
               >
                 Запечённые роллы

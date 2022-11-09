@@ -7,11 +7,12 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
+import { NavTab } from '../Main/NavTab/NavTab';
+import { NotFound } from '../NotFound/NotFound';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
-import { NavTab } from '../Main/NavTab/NavTab';
-import { Footer } from '../Footer/Footer';
-import { NotFound } from '../NotFound/NotFound';
+import { SavedMovies } from '../Movies/SavedMovies/SavedMovies';
 
 export const App = () => {
   const [isAuthorized, setAuthorized] = useState(false);
@@ -36,6 +37,10 @@ export const App = () => {
         <Route
           path="/movies"
           element={<Movies />}
+        />
+        <Route
+          path="/saved-movies"
+          element={<SavedMovies />}
         />
         <Route
           path="/404"

@@ -52,17 +52,21 @@
 
 .navigation-links_type_menu .navigation-link {
   font-size: 13px;
+  font-weight: 400;
 }
 
-.navigation-links_type_menu .navigation-link_inactive {
-  font-weight: 400;
+.navigation-links_type_menu .navigation-link_active {
+  cursor: default;
+  font-weight: 500;
 }
 
 .navigation-links_type_navtab .navigation-link {
   font-size: 18px;
+  font-weight: 500;
 }
 
 .navigation-links_type_navtab .navigation-link_active {
+  cursor: default;
   text-decoration: underline 2px;
   text-underline-offset: 6px;
 }
@@ -70,12 +74,14 @@
 .navigation-link_type_login {
   padding: 8px 20px;
   border-radius: 3px;
+  font-weight: 500;
 }
 
 .navigation-link_type_account {
   padding: 8px 20px;
   border-radius: 20px;
   font-size: 14px;
+  font-weight: 500;
 }
 
 .navigation-link_type_burger {
