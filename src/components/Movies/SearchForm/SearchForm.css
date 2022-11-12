@@ -190,6 +190,7 @@
   .search {
     padding-right: 18px;
     padding-left: 18px;
+    gap: 45px;
   }
 
   .search__form {

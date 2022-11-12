@@ -79,7 +79,7 @@
 }
 
 .card__button_type_remove:hover {
-  filter: drop-shadow(0 0 4px #818181);
+  filter: drop-shadow(0 0 2px #818181);
 }
 
 .card__image {
