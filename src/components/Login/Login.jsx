@@ -48,20 +48,26 @@ export const Login = () => (
       </div>
 
       <fieldset className="profile-form__fields">
+        <span
+          className="profile-form__field-error profile-form__field-error_for-api"
+        >
+          Неправильный логин или пароль
+        </span>
         <button
           type="button"
           className="button button_bg_accent profile-form__button"
+          disabled
         >
-          Зарегистрироваться
+          Войти
         </button>
         <p className="profile-form__subbutton-text">
-          Ещё не зарегистрированы?
+          Нет аккаунта?
           {' '}
           <Link
             to="/signup"
             className="profile-form__subbutton-link"
           >
-            Войти
+            Зарегистрироваться
           </Link>
         </p>
       </fieldset>

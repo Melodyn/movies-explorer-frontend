@@ -68,6 +68,9 @@ export const Register = () => (
       </div>
 
       <fieldset className="profile-form__fields">
+        <span
+          className="profile-form__field-error profile-form__field-error_for-api"
+        />
         <button
           type="button"
           className="button button_bg_accent profile-form__button"
