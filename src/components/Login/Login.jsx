@@ -4,7 +4,7 @@ import { Header } from '../Header/Header';
 export const Login = () => (
   <main className="main profile-form-container">
     <Header isLocationSign />
-    <form action="/" name="register" className="profile-form">
+    <form action="/" name="login" className="profile-form">
       <div className="profile-form__fields-wrapper">
         <h1 className="profile-form__header">Вход</h1>
 
