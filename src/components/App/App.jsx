@@ -16,6 +16,7 @@ import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../Movies/SavedMovies/SavedMovies';
 import { Register } from '../Register/Register';
 import { Login } from '../Login/Login';
+import { Profile } from '../Profile/Profile';
 
 export const App = () => {
   const [isAuthorized, setAuthorized] = useState(false);
@@ -23,6 +24,7 @@ export const App = () => {
   const location = useLocation();
   const isKnownRoute = location.pathname !== '/404';
   const isLocationSign = location.pathname.includes('/sign');
+  const isLocationProfile = location.pathname === '/profile';
   const mustShowAppComponents = isKnownRoute && !isLocationSign;
 
   return (
@@ -49,6 +51,10 @@ export const App = () => {
         <Route
           path="/signin"
           element={<Login />}
+        />
+        <Route
+          path="/profile"
+          element={<Profile />}
         />
 
         <Route
@@ -78,7 +84,7 @@ export const App = () => {
       />
       )}
 
-      {mustShowAppComponents && <Footer />}
+      {mustShowAppComponents && !isLocationProfile && <Footer />}
     </>
   );
 };
