@@ -2,10 +2,15 @@ import './Header.css';
 import {
   Link,
 } from 'react-router-dom';
-import { Navigation } from '../Navigation/Navigation';
+import cn from 'classnames';
 
-export const Header = ({ isAuthorized, onClickBurger }) => (
-  <header className="header">
+export const Header = ({
+  isAuthorized = false,
+  onClickBurger = () => {},
+  isLocationSign = false,
+  children = null,
+}) => (
+  <header className={cn('header', { header_compact: isLocationSign })}>
     <Link
       to="/"
       className="animation logo"
@@ -21,6 +26,6 @@ export const Header = ({ isAuthorized, onClickBurger }) => (
       />
     )}
 
-    <Navigation isAuthorized={isAuthorized} place="header" />
+    {children}
   </header>
 );

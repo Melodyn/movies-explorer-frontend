@@ -7,26 +7,33 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { Header } from '../Header/Header';
+import { Navigation } from '../Navigation/Navigation';
 import { Footer } from '../Footer/Footer';
 import { NavTab } from '../Main/NavTab/NavTab';
 import { NotFound } from '../NotFound/NotFound';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../Movies/SavedMovies/SavedMovies';
+import { Register } from '../Register/Register';
+import { Login } from '../Login/Login';
 
 export const App = () => {
   const [isAuthorized, setAuthorized] = useState(false);
   const [isNavtabOpened, setIsNavtabOpened] = useState(false);
   const location = useLocation();
   const isKnownRoute = location.pathname !== '/404';
+  const isLocationSign = location.pathname.includes('/sign');
+  const mustShowAppComponents = isKnownRoute && !isLocationSign;
 
   return (
     <>
-      {isKnownRoute && (
+      {mustShowAppComponents && (
       <Header
         isAuthorized={isAuthorized}
         onClickBurger={() => setIsNavtabOpened(true)}
-      />
+      >
+        <Navigation isAuthorized={isAuthorized} place="header" />
+      </Header>
       )}
 
       <Routes>
@@ -34,6 +41,16 @@ export const App = () => {
           path="/"
           element={<Main onClickAuth={() => setAuthorized(!isAuthorized)} />}
         />
+
+        <Route
+          path="/signup"
+          element={<Register />}
+        />
+        <Route
+          path="/signin"
+          element={<Login />}
+        />
+
         <Route
           path="/movies"
           element={<Movies />}
@@ -42,6 +59,7 @@ export const App = () => {
           path="/saved-movies"
           element={<SavedMovies />}
         />
+
         <Route
           path="/404"
           element={<NotFound />}
@@ -52,7 +70,7 @@ export const App = () => {
         />
       </Routes>
 
-      {isKnownRoute && (
+      {mustShowAppComponents && (
       <NavTab
         isAuthorized={isAuthorized}
         isOpen={isNavtabOpened}
@@ -60,7 +78,7 @@ export const App = () => {
       />
       )}
 
-      {isKnownRoute && <Footer />}
+      {mustShowAppComponents && <Footer />}
     </>
   );
 };

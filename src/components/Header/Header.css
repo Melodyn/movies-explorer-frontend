@@ -10,6 +10,10 @@
   background-size: auto;
 }
 
+.header_compact > .logo {
+  padding: 0;
+}
+
 .header {
   display: flex;
   width: 100%;
@@ -20,20 +24,32 @@
   margin: 0;
 }
 
+.header_compact {
+  padding: 0;
+}
+
 @media screen and (max-width: 1239px) {
-  .header {
+  .header:not(.header_compact) {
     padding: 18px 30px;
   }
 }
 
 @media screen and (max-width: 879px) {
-  .header {
+  .header:not(.header_compact) {
     justify-content: space-between;
   }
 }
 
 @media screen and (max-width: 479px) {
-  .header {
+  .header:not(.header_compact) {
     padding: 14px 18px;
+  }
+
+  .header_compact {
+    justify-content: center;
+  }
+
+  .header_compact > .logo {
+    background-position: center;
   }
 }

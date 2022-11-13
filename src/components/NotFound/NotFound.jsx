@@ -7,11 +7,11 @@ export const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <article className="not-found">
-      <section className="not-found__content">
+    <main className="not-found">
+      <article className="not-found__content">
         <h1 className="not-found__header">404</h1>
         <p className="not-found__text">Страница не страница</p>
-      </section>
+      </article>
       <button
         type="button"
         className="button button_bg_light not-found__button"
@@ -19,6 +19,6 @@ export const NotFound = () => {
       >
         Назад
       </button>
-    </article>
+    </main>
   );
 };
