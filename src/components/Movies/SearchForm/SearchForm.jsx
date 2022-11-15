@@ -13,6 +13,8 @@ export const SearchForm = () => (
           placeholder="Ролл"
           id="film"
           name="film"
+          minLength={3}
+          required
         />
         <button
           className="animation button search-form__button"

@@ -4,7 +4,7 @@
 
 Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
-* Frontend: https://diploma.melodyn.nomoredomains.icu
+* Макет: https://www.figma.com/file/bJg1QeCom9gibMzWr3MUec/Diploma?node-id=932%3A3320&t=IH9EZlwnOoIFyg1r-0
 
 ## Технологии
 

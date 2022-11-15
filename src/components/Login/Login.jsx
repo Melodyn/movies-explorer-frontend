@@ -20,6 +20,7 @@ export const Login = () => (
               name="email"
               id="email"
               className="sign-form__field"
+              required
             />
             <span
               className="sign-form__field-error"
@@ -37,6 +38,7 @@ export const Login = () => (
               name="password"
               id="password"
               className="sign-form__field"
+              required
             />
             <span
               className="sign-form__field-error"

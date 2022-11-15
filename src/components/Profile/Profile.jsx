@@ -19,7 +19,9 @@ export const Profile = () => (
               id="name"
               className="profile-form__field"
               value="Пепега"
+              minLength={3}
               disabled
+              required
             />
           </label>
           <hr />
@@ -36,6 +38,7 @@ export const Profile = () => (
               className="profile-form__field"
               value="pepe@ga.ga"
               disabled
+              required
             />
           </label>
         </fieldset>

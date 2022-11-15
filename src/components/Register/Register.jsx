@@ -21,6 +21,8 @@ export const Register = () => (
               name="name"
               id="name"
               className="sign-form__field"
+              minLength={3}
+              required
             />
             <span
               className="sign-form__field-error"
@@ -40,6 +42,7 @@ export const Register = () => (
               name="email"
               id="email"
               className="sign-form__field"
+              required
             />
             <span
               className="sign-form__field-error"
@@ -57,6 +60,7 @@ export const Register = () => (
               name="password"
               id="password"
               className="sign-form__field"
+              required
             />
             <span
               className="sign-form__field-error"
