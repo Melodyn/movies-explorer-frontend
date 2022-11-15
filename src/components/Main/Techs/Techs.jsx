@@ -2,7 +2,7 @@ import './Techs.css';
 
 export const Techs = () => (
   <article className="article techs">
-    <h1 className="article__header" id="techs">Технологии</h1>
+    <h2 className="article__header" id="techs">Технологии</h2>
     <section className="techs__description">
       <h2 className="techs__header">7 технологий</h2>
       <p className="techs__text">

@@ -3,9 +3,9 @@ import './Footer.css';
 export const Footer = () => (
   <footer className="article footer">
     <section className="footer__container">
-      <p className="footer__about">
+      <h2 className="footer__about">
         Никакие права не&nbsp;защищены, все&nbsp;обязанности&nbsp;даны
-      </p>
+      </h2>
       <div className="footer__info">
         <span className="footer__year">
           &copy; 2022

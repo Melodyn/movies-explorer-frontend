@@ -13,7 +13,7 @@
   background-color: #e8e8e8;
 }
 
-.search__form {
+.search-form {
   display: flex;
   overflow: hidden;
   width: 100%;
@@ -31,7 +31,7 @@
   margin: 0;
 }
 
-.search-film__label {
+.search-form__label {
   display: block;
   width: 22px;
   height: 22px;
@@ -43,7 +43,7 @@
   background-size: 22px;
 }
 
-.search-film__input {
+.search-form__input {
   width: 100%;
   height: 100%;
   padding: 4px 0;
@@ -57,11 +57,11 @@
   outline-offset: 4px;
 }
 
-.search-film__input::placeholder {
+.search-form__input::placeholder {
   color: #a0a0a0;
 }
 
-.search-film__button {
+.search-form__button {
   width: 80px;
   height: 34px;
   background-image: url('../../../images/find.svg');
@@ -181,7 +181,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .search-film__label {
+  .search-form__label {
     display: none;
   }
 }
@@ -193,13 +193,13 @@
     gap: 45px;
   }
 
-  .search__form {
+  .search-form {
     flex-direction: column;
     align-items: center;
     gap: 45px;
   }
 
-  .search-film__input {
+  .search-form__input {
     font-size: 14px;
   }
 

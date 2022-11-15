@@ -4,7 +4,7 @@ import { Portfolio } from '../Portfolio/Portfolio';
 
 export const AboutMe = () => (
   <article className="article about-me">
-    <h1 className="article__header" id="about-me">Автор</h1>
+    <h2 className="article__header" id="about-me">Автор</h2>
     <section className="two-columns about-me__columns">
       <div className="two-columns__column about-me__column about-me__content">
         <div className="about-me__description">
@@ -31,7 +31,7 @@ export const AboutMe = () => (
       <figure className="two-columns__column about-me__column about-me__image-container">
         <img
           src={pepePhoto}
-          className="two-columns__column about-me__column about-me__image"
+          className="about-me__image"
           alt="Аватар"
         />
       </figure>

@@ -2,7 +2,7 @@ import './AboutProject.css';
 
 export const AboutProject = () => (
   <article className="article about-project">
-    <h1 className="article__header" id="about-project">О проекте</h1>
+    <h2 className="article__header" id="about-project">О проекте</h2>
     <section className="two-columns about-project__columns">
       <div className="two-columns__column about-project__column">
         <h2 className="about-project__subheader">Только смешные видосы</h2>

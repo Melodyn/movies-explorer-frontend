@@ -4,18 +4,18 @@ import './SearchForm.css';
 
 export const SearchForm = () => (
   <article className="article search" aria-label="Поиск роллов">
-    <form action="/" name="search" className="search__form">
+    <form action="/" name="search" className="search-form">
       <fieldset className="search__fields search__fields_type_film">
-        <label className="search-film__label" htmlFor="film" />
+        <label className="search-form__label" htmlFor="film" />
         <input
-          className="search-film__input"
+          className="search-form__input"
           type="text"
           placeholder="Ролл"
           id="film"
           name="film"
         />
         <button
-          className="animation button search-film__button"
+          className="animation button search-form__button"
           type="submit"
           aria-label="Найти"
         />
