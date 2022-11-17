@@ -17,7 +17,7 @@ export const MoviesCard = ({ card = {} }) => {
   );
 
   return (
-    <li>
+    <li className="cards__item">
       <section className="card">
         <div className="card__content">
           <div className="card__info">

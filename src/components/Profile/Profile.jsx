@@ -25,7 +25,10 @@ export const Profile = () => (
             />
           </label>
           <hr />
-          <label className="profile-form__label" htmlFor="email">
+          <label
+            className="profile-form__label profile-form__label_borderless"
+            htmlFor="email"
+          >
             <span
               className="profile-form__field-name"
             >

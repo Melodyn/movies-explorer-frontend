@@ -41,6 +41,14 @@
   }
 }
 
+@media screen and (max-width: 767px) {
+  .cards {
+    max-width: 400px;
+    margin: 0 auto;
+    grid-template-columns: minmax(284px, 1fr);
+  }
+}
+
 @media screen and (max-width: 479px) {
   .article {
     padding: 40px 18px 80px;

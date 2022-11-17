@@ -43,15 +43,15 @@
   margin: 0;
 }
 
-.project-progress__cell:nth-child(1) {
+.project-progress__cell_color_green {
   background-color: #2be080;
 }
 
-.project-progress__cell:nth-child(2) {
+.project-progress__cell_color_gray {
   background-color: #f2f2f2;
 }
 
-.project-progress__cell:nth-child(n + 3) {
+.project-progress__cell_color_transparent {
   color: #a0a0a0;
 }
 

@@ -67,7 +67,7 @@
   margin: 0;
 }
 
-.profile-form__label:last-child {
+.profile-form__label_borderless {
   border: none;
 }
 

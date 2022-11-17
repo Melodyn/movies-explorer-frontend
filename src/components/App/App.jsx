@@ -19,7 +19,7 @@ import { Login } from '../Login/Login';
 import { Profile } from '../Profile/Profile';
 
 export const App = () => {
-  const [isAuthorized, setAuthorized] = useState(false);
+  const [isAuthorized] = useState(true);
   const [isNavtabOpened, setIsNavtabOpened] = useState(false);
   const location = useLocation();
   const isKnownRoute = location.pathname !== '/404';
@@ -41,7 +41,7 @@ export const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Main onClickAuth={() => setAuthorized(!isAuthorized)} />}
+          element={<Main />}
         />
 
         <Route

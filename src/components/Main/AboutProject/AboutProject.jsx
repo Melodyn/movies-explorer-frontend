@@ -14,16 +14,16 @@ export const AboutProject = () => (
       </div>
     </section>
     <div className="project-progress">
-      <div className="project-progress__cell">
+      <div className="project-progress__cell project-progress__cell_color_green">
         <span className="project-progress__text">1 шаг</span>
       </div>
-      <div className="project-progress__cell">
+      <div className="project-progress__cell project-progress__cell_color_gray">
         <span className="project-progress__text">4 шага</span>
       </div>
-      <div className="project-progress__cell">
+      <div className="project-progress__cell project-progress__cell_color_transparent">
         <span className="project-progress__text">Регистрация</span>
       </div>
-      <div className="project-progress__cell">
+      <div className="project-progress__cell project-progress__cell_color_transparent">
         <span className="project-progress__text">До угара</span>
       </div>
     </div>
