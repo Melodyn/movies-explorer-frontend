@@ -1,0 +1,153 @@
+@import url('../../vendor/normalize.css');
+@import url('../../vendor/inter.css');
+
+.page {
+  display: flex;
+  width: 100%;
+  min-width: 320px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0 auto;
+  background-color: #fafafa;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 0;
+  margin: 0;
+}
+
+.article {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding: 100px 70px;
+  margin: 0;
+  background-color: white;
+}
+
+.two-columns {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+/* button */
+
+.button {
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  margin: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button_bg_accent {
+  background-color: rgba(43 224 128 / 100%);
+}
+
+.button_bg_accent:hover {
+  background-color: rgba(43 224 128 / 80%);
+}
+
+.button_bg_light {
+  background-color: rgba(249 249 249 / 100%);
+}
+
+.button_bg_light:hover {
+  background-color: rgba(249 249 249 / 80%);
+}
+
+.button_bg_gray {
+  background-color: rgba(232 232 232 / 100%);
+}
+
+.button_bg_gray:hover {
+  background-color: rgba(232 232 232 / 80%);
+}
+
+/* animation */
+
+.animation {
+  opacity: 1;
+  transition: .3s;
+}
+
+.animation:hover {
+  opacity: .7;
+}
+
+/* headers */
+
+.article__header {
+  position: relative;
+  padding: 0 0 23px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.article__header::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  content: '';
+}
+
+/* media */
+
+@media screen and (max-width: 879px) {
+  .article {
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .two-columns {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .article {
+    padding: 70px 18px;
+  }
+
+  .article__header {
+    padding: 0 0 28px;
+    font-size: 18px;
+  }
+}
