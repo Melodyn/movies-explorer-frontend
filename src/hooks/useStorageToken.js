@@ -8,7 +8,7 @@ export const useStorageToken = () => {
     } else {
       localStorage.removeItem('token');
     }
-    setToken(newToken);
+    setToken(() => newToken);
   };
 
   return [token, save];

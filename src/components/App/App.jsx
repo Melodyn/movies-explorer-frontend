@@ -51,11 +51,11 @@ export const App = ({ config }) => {
       saveToken(updatedUser.token);
     }
 
-    setCurrentUser(updatedUser);
+    setCurrentUser(() => updatedUser);
   };
 
-  const onLogin = ({ token }) => {
-    updateUser({ token });
+  const onLogin = (user) => {
+    updateUser({ token: user.token });
     navigate(ROUTE.MAIN);
   };
 
@@ -79,19 +79,17 @@ export const App = ({ config }) => {
     if (currentUser.token) {
       apiMain.checkToken()
         .then((user) => {
-          console.log('user', user);
           updateUser(user);
         })
         .catch(() => {
           updateUser(defaultUser);
           navigate(ROUTE.MAIN);
-        })
+        });
     } else {
       updateUser(defaultUser);
       navigate(ROUTE.MAIN);
     }
   }, [currentUser.token]);
-
 
   return (
     <UserContext.Provider value={currentUser}>
@@ -119,28 +117,28 @@ export const App = ({ config }) => {
         />
         <Route
           path={ROUTE.PROFILE}
-          element={
+          element={(
             <ProtectedRoute>
               <Profile onLogout={onLogout} onEdit={onEditProfile} apiMain={apiMain} />
             </ProtectedRoute>
-          }
+          )}
         />
 
         <Route
           path={ROUTE.MOVIES}
-          element={
+          element={(
             <ProtectedRoute>
               <Movies />
             </ProtectedRoute>
-          }
+          )}
         />
         <Route
           path={ROUTE.MOVIES_SAVED}
-          element={
+          element={(
             <ProtectedRoute>
               <SavedMovies />
             </ProtectedRoute>
-          }
+          )}
         />
 
         <Route

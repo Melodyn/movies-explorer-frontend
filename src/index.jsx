@@ -12,9 +12,7 @@ const config = configByEnv[env];
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App config={config} />
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <App config={config} />
+  </BrowserRouter>,
 );

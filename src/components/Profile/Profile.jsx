@@ -1,12 +1,17 @@
 import './Profile.css';
-import { useRef, useContext, useState } from 'react';
+import {
+  useRef,
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
 import cn from 'classnames';
 import { useForm } from '../../hooks/useForm';
 import { UserContext } from '../../contexts/User';
 
 const processErrorsMessages = (errors) => Object
   .entries(errors)
-  .filter(([_, message]) => message.length > 0)
+  .filter(([, message]) => message.length > 0)
   .map(([name, message]) => `${name}: ${message}`)
   .join('\n');
 
@@ -20,6 +25,7 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
     isLocked,
     setValues,
     setSubmitHandler,
+    resetValues,
   } = useForm(formRef, {
     email: currentUser.email,
     name: currentUser.name,
@@ -34,19 +40,29 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
     });
   const onSubmit = setSubmitHandler(edit);
 
+  useEffect(() => {
+    resetValues({
+      email: currentUser.email,
+      name: currentUser.name,
+    });
+  }, [currentUser.email, currentUser.name]);
+
   return (
     <main className="main profile-form-container">
       <form action="/" name="edit" className="profile-form" onSubmit={onSubmit} ref={formRef}>
         <div className="profile-form__fields-wrapper">
-          <h1 className="profile-form__header">Здарова, бандиты</h1>
+          <h1 className="profile-form__header">
+            Здарова,
+            {currentUser.name}
+          </h1>
 
           <fieldset className="profile-form__fields">
             <label className="profile-form__label" htmlFor="name">
-            <span
-              className="profile-form__field-name"
-            >
-              Никнейм
-            </span>
+              <span
+                className="profile-form__field-name"
+              >
+                Никнейм
+              </span>
               <input
                 type="text"
                 name="name"
@@ -64,11 +80,11 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
               className="profile-form__label profile-form__label_borderless"
               htmlFor="email"
             >
-            <span
-              className="profile-form__field-name"
-            >
-              Почта
-            </span>
+              <span
+                className="profile-form__field-name"
+              >
+                Почта
+              </span>
               <input
                 type="email"
                 name="email"
@@ -86,12 +102,15 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
         <fieldset className="profile-form__fields profile-form__fields_flex">
           <span
             className="profile-form__field-error"
-          >{apiError || processErrorsMessages(errors)}</span>
+          >
+            {apiError || processErrorsMessages(errors)}
+          </span>
           <button
             type="submit"
             className={cn(
               { animation: (isValid && !isLocked) },
-              'button profile-form__button profile-form__button_action_edit')}
+              'button profile-form__button profile-form__button_action_edit',
+            )}
             disabled={!formIsValid || isLocked}
           >
             Редактировать
@@ -108,4 +127,4 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
       </form>
     </main>
   );
-}
+};

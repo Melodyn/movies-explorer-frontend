@@ -16,13 +16,11 @@ export const Register = ({ onRegister, apiMain }) => {
   } = useForm(formRef, { name: '', email: '', password: '' });
   const [apiError, setApiError] = useState('');
 
-  const register = (data) => {
-    return apiMain.register(data)
-      .then(onRegister)
-      .catch((err) => {
-        setApiError(err.message);
-      });
-  };
+  const register = (data) => apiMain.register(data)
+    .then(onRegister)
+    .catch((err) => {
+      setApiError(err.message);
+    });
   const onSubmit = setSubmitHandler(register);
 
   return (
@@ -34,11 +32,11 @@ export const Register = ({ onRegister, apiMain }) => {
 
           <fieldset className="sign-form__fields">
             <label className="sign-form__label" htmlFor="name">
-            <span
-              className="sign-form__field-name"
-            >
-              Никнейм
-            </span>
+              <span
+                className="sign-form__field-name"
+              >
+                Никнейм
+              </span>
               <input
                 type="text"
                 name="name"
@@ -52,15 +50,17 @@ export const Register = ({ onRegister, apiMain }) => {
               />
               <span
                 className="sign-form__field-error"
-              >{errors.name}</span>
+              >
+                {errors.name}
+              </span>
             </label>
 
             <label className="sign-form__label" htmlFor="email">
-            <span
-              className="sign-form__field-name"
-            >
-              Почта
-            </span>
+              <span
+                className="sign-form__field-name"
+              >
+                Почта
+              </span>
               <input
                 type="email"
                 name="email"
@@ -73,15 +73,17 @@ export const Register = ({ onRegister, apiMain }) => {
               />
               <span
                 className="sign-form__field-error"
-              >{errors.email}</span>
+              >
+                {errors.email}
+              </span>
             </label>
 
             <label className="sign-form__label" htmlFor="password">
-            <span
-              className="sign-form__field-name"
-            >
-              Пароль
-            </span>
+              <span
+                className="sign-form__field-name"
+              >
+                Пароль
+              </span>
               <input
                 type="password"
                 name="password"
@@ -95,15 +97,19 @@ export const Register = ({ onRegister, apiMain }) => {
               />
               <span
                 className="sign-form__field-error"
-              >{errors.password}</span>
+              >
+                {errors.password}
+              </span>
             </label>
           </fieldset>
         </div>
 
         <fieldset className="sign-form__fields">
-        <span
-          className="sign-form__field-error sign-form__field-error_for-api"
-        >{apiError}</span>
+          <span
+            className="sign-form__field-error sign-form__field-error_for-api"
+          >
+            {apiError}
+          </span>
           <button
             type="submit"
             className="button button_bg_accent sign-form__button"

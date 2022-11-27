@@ -3,8 +3,8 @@
 // эти правила сложно обойти правильно, пусть будут отключены
 import './NavTab.css';
 import cn from 'classnames';
-import { Navigation } from '../../Navigation/Navigation';
 import { useContext } from 'react';
+import { Navigation } from '../../Navigation/Navigation';
 import { UserContext } from '../../../contexts/User';
 
 export const NavTab = ({ isOpen, onClose }) => {
