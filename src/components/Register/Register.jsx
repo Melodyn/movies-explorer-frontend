@@ -1,10 +1,10 @@
 import './Register.css';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../Header/Header';
 import { useForm } from '../../hooks/useForm';
 
-export const Register = ({ onRegister }) => {
+export const Register = ({ onRegister, apiMain }) => {
   const formRef = useRef(null);
   const {
     values,
@@ -14,8 +14,16 @@ export const Register = ({ onRegister }) => {
     setValues,
     setSubmitHandler,
   } = useForm(formRef, { name: '', email: '', password: '' });
+  const [apiError, setApiError] = useState('');
 
-  const onSubmit = setSubmitHandler(onRegister);
+  const register = (data) => {
+    return apiMain.register(data)
+      .then(onRegister)
+      .catch((err) => {
+        setApiError(err.message);
+      });
+  };
+  const onSubmit = setSubmitHandler(register);
 
   return (
     <main className="main sign-form-container">
@@ -95,7 +103,7 @@ export const Register = ({ onRegister }) => {
         <fieldset className="sign-form__fields">
         <span
           className="sign-form__field-error sign-form__field-error_for-api"
-        />
+        >{apiError}</span>
           <button
             type="submit"
             className="button button_bg_accent sign-form__button"

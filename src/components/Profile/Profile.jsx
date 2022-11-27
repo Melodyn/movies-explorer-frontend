@@ -1,5 +1,5 @@
 import './Profile.css';
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useState } from 'react';
 import cn from 'classnames';
 import { useForm } from '../../hooks/useForm';
 import { UserContext } from '../../contexts/User';
@@ -10,7 +10,7 @@ const processErrorsMessages = (errors) => Object
   .map(([name, message]) => `${name}: ${message}`)
   .join('\n');
 
-export const Profile = ({ onLogout, onEdit }) => {
+export const Profile = ({ onLogout, onEdit, apiMain }) => {
   const currentUser = useContext(UserContext);
   const formRef = useRef(null);
   const {
@@ -24,9 +24,15 @@ export const Profile = ({ onLogout, onEdit }) => {
     email: currentUser.email,
     name: currentUser.name,
   });
+  const [apiError, setApiError] = useState('');
 
   const formIsValid = (isValid || isValid === null);
-  const onSubmit = setSubmitHandler(onEdit);
+  const edit = (data) => apiMain.setInfo(data)
+    .then(onEdit)
+    .catch((err) => {
+      setApiError(err.message);
+    });
+  const onSubmit = setSubmitHandler(edit);
 
   return (
     <main className="main profile-form-container">
@@ -80,7 +86,7 @@ export const Profile = ({ onLogout, onEdit }) => {
         <fieldset className="profile-form__fields profile-form__fields_flex">
           <span
             className="profile-form__field-error"
-          >{processErrorsMessages(errors)}</span>
+          >{apiError || processErrorsMessages(errors)}</span>
           <button
             type="submit"
             className={cn(

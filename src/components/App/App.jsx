@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -10,6 +10,8 @@ import {
 // helpers
 import { UserContext, defaultUser } from '../../contexts/User';
 import { useStorageToken } from '../../hooks/useStorageToken';
+import { ROUTE } from '../../utils/constants';
+import { ApiMain } from '../../utils/ApiMain';
 // components
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { Header } from '../Header/Header';
@@ -24,7 +26,8 @@ import { Register } from '../Register/Register';
 import { Login } from '../Login/Login';
 import { Profile } from '../Profile/Profile';
 
-export const App = () => {
+export const App = ({ config }) => {
+  const apiMain = new ApiMain(config);
   const navigate = useNavigate();
   const [isNavtabOpened, setIsNavtabOpened] = useState(false);
   const [token, saveToken] = useStorageToken();
@@ -34,9 +37,9 @@ export const App = () => {
   });
 
   const location = useLocation();
-  const isKnownRoute = location.pathname !== '/404';
+  const isKnownRoute = location.pathname !== ROUTE.NOT_FOUND;
   const isLocationSign = location.pathname.includes('/sign');
-  const isLocationProfile = location.pathname === '/profile';
+  const isLocationProfile = location.pathname === ROUTE.PROFILE;
   const mustShowAppComponents = isKnownRoute && !isLocationSign;
 
   const updateUser = (newUser) => {
@@ -51,25 +54,44 @@ export const App = () => {
     setCurrentUser(updatedUser);
   };
 
-  const onLogin = async (user) => {
-    user.token = 'jopa lala';
-    updateUser(user);
-    navigate('/');
+  const onLogin = ({ token }) => {
+    updateUser({ token });
+    navigate(ROUTE.MAIN);
   };
 
-  const onRegister = async (user) => {
+  const onRegister = (user) => {
     updateUser(user);
-    navigate('/signin');
+    navigate(ROUTE.SIGNIN);
   };
 
-  const onEditProfile = async (user) => {
+  const onEditProfile = (user) => {
     updateUser(user);
   };
 
   const onLogout = () => {
     updateUser(defaultUser);
-    navigate('/signin');
+    navigate(ROUTE.SIGNIN);
   };
+
+  useEffect(() => {
+    apiMain.setToken(currentUser.token);
+
+    if (currentUser.token) {
+      apiMain.checkToken()
+        .then((user) => {
+          console.log('user', user);
+          updateUser(user);
+        })
+        .catch(() => {
+          updateUser(defaultUser);
+          navigate(ROUTE.MAIN);
+        })
+    } else {
+      updateUser(defaultUser);
+      navigate(ROUTE.MAIN);
+    }
+  }, [currentUser.token]);
+
 
   return (
     <UserContext.Provider value={currentUser}>
@@ -83,29 +105,29 @@ export const App = () => {
 
       <Routes>
         <Route
-          path="/"
+          path={ROUTE.MAIN}
           element={<Main />}
         />
 
         <Route
-          path="/signup"
-          element={<Register onRegister={onRegister}/>}
+          path={ROUTE.SIGNUP}
+          element={<Register onRegister={onRegister} apiMain={apiMain} />}
         />
         <Route
-          path="/signin"
-          element={<Login onLogin={onLogin} />}
+          path={ROUTE.SIGNIN}
+          element={<Login onLogin={onLogin} apiMain={apiMain} />}
         />
         <Route
-          path="/profile"
+          path={ROUTE.PROFILE}
           element={
             <ProtectedRoute>
-              <Profile onLogout={onLogout} onEdit={onEditProfile} />
+              <Profile onLogout={onLogout} onEdit={onEditProfile} apiMain={apiMain} />
             </ProtectedRoute>
           }
         />
 
         <Route
-          path="/movies"
+          path={ROUTE.MOVIES}
           element={
             <ProtectedRoute>
               <Movies />
@@ -113,7 +135,7 @@ export const App = () => {
           }
         />
         <Route
-          path="/saved-movies"
+          path={ROUTE.MOVIES_SAVED}
           element={
             <ProtectedRoute>
               <SavedMovies />
@@ -122,12 +144,12 @@ export const App = () => {
         />
 
         <Route
-          path="/404"
+          path={ROUTE.NOT_FOUND}
           element={<NotFound />}
         />
         <Route
           path="*"
-          element={<Navigate to="/404" replace />}
+          element={<Navigate to={ROUTE.NOT_FOUND} replace />}
         />
       </Routes>
 

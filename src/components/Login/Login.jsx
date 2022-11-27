@@ -1,9 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../Header/Header';
 import { useForm } from '../../hooks/useForm';
 
-export const Login = ({ onLogin }) => {
+export const Login = ({ onLogin, apiMain }) => {
   const formRef = useRef(null);
   const {
     values,
@@ -13,8 +13,14 @@ export const Login = ({ onLogin }) => {
     setValues,
     setSubmitHandler,
   } = useForm(formRef, { email: '', password: '' });
+  const [apiError, setApiError] = useState('');
 
-  const onSubmit = setSubmitHandler(onLogin);
+  const login = (data) => apiMain.login(data)
+    .then(onLogin)
+    .catch((err) => {
+      setApiError(err.message);
+    });
+  const onSubmit = setSubmitHandler(login);
 
   return (
     <main className="main sign-form-container">
@@ -72,9 +78,7 @@ export const Login = ({ onLogin }) => {
         <fieldset className="sign-form__fields">
         <span
           className="sign-form__field-error sign-form__field-error_for-api"
-        >
-          Неправильный логин или пароль
-        </span>
+        >{apiError}</span>
           <button
             type="submit"
             className="button button_bg_accent sign-form__button"
