@@ -4,8 +4,13 @@ import {
   Link,
   useLocation,
 } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/User';
 
-export const Navigation = ({ isAuthorized, place, onClick }) => {
+export const Navigation = ({ place, onClick }) => {
+  const currentUser = useContext(UserContext);
+  const isAuthorized = currentUser.isAuth();
+
   const location = useLocation();
   const isLocationMain = (location.pathname === '/');
   const isLocationMovies = !isLocationMain && (location.pathname === '/movies');

@@ -27,6 +27,7 @@
 
 .header_compact {
   padding: 0;
+  background-color: transparent;
 }
 
 @media screen and (max-width: 1239px) {

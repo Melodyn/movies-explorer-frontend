@@ -4,8 +4,12 @@
 import './NavTab.css';
 import cn from 'classnames';
 import { Navigation } from '../../Navigation/Navigation';
+import { useContext } from 'react';
+import { UserContext } from '../../../contexts/User';
 
-export const NavTab = ({ isAuthorized, isOpen, onClose }) => {
+export const NavTab = ({ isOpen, onClose }) => {
+  const currentUser = useContext(UserContext);
+  const isAuthorized = currentUser.isAuth();
   if (!isAuthorized) return null;
   const className = cn(
     'navtab',
@@ -27,7 +31,6 @@ export const NavTab = ({ isAuthorized, isOpen, onClose }) => {
         />
 
         <Navigation
-          isAuthorized={isAuthorized}
           place="navtab"
           onClick={onClose}
         />

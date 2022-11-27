@@ -101,6 +101,7 @@
   font-size: 10px;
   font-weight: 400;
   text-align: center;
+  white-space: pre;
 }
 
 .profile-form__button {
@@ -110,6 +111,10 @@
   font-size: 13px;
   font-weight: 400;
   text-align: center;
+}
+
+.profile-form__button:disabled {
+  color: #c2c2c2;
 }
 
 .profile-form__button_action_logout {

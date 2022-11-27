@@ -8,7 +8,7 @@ export const SearchForm = () => (
       <fieldset className="search__fields search__fields_type_film">
         <label className="search-form__label" htmlFor="film" />
         <input
-          className="search-form__input"
+          className="search-form__input form-field"
           type="text"
           placeholder="Ролл"
           id="film"
