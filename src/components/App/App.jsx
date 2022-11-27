@@ -12,6 +12,7 @@ import { UserContext, defaultUser } from '../../contexts/User';
 import { useStorageToken } from '../../hooks/useStorageToken';
 import { ROUTE } from '../../utils/constants';
 import { ApiMain } from '../../utils/ApiMain';
+import { ApiFilms } from '../../utils/ApiFilms';
 // components
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { Header } from '../Header/Header';
@@ -28,6 +29,7 @@ import { Profile } from '../Profile/Profile';
 
 export const App = ({ config }) => {
   const apiMain = new ApiMain(config);
+  const apiFilms = new ApiFilms(config);
   const navigate = useNavigate();
   const [isNavtabOpened, setIsNavtabOpened] = useState(false);
   const [token, saveToken] = useStorageToken();
@@ -80,7 +82,10 @@ export const App = ({ config }) => {
       apiMain.checkToken()
         .then((user) => {
           updateUser(user);
+          return apiFilms.getFilms();
         })
+        // eslint-disable-next-line no-console
+        .then(console.log)
         .catch(() => {
           updateUser(defaultUser);
           navigate(ROUTE.MAIN);
