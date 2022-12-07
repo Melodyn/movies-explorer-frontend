@@ -11,8 +11,10 @@ import {
 import { UserContext, defaultUser } from '../../contexts/User';
 import { useStorageToken } from '../../hooks/useStorageToken';
 import { ROUTE } from '../../utils/constants';
-import { ApiMain } from '../../utils/ApiMain';
-import { ApiFilms } from '../../utils/ApiFilms';
+// import { ApiMain } from '../../utils/ApiMain';
+// import { ApiFilms } from '../../utils/ApiFilms';
+import { FakeApiMain } from '../../utils/FakeApiMain';
+import { FakeApiFilms } from '../../utils/FakeApiFilms';
 // components
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { Header } from '../Header/Header';
@@ -28,9 +30,11 @@ import { Login } from '../Login/Login';
 import { Profile } from '../Profile/Profile';
 
 export const App = ({ config }) => {
-  const apiMain = new ApiMain(config);
-  const apiFilms = new ApiFilms(config);
-  const navigate = useNavigate();
+  // const apiMain = new ApiMain(config);
+  // const apiFilms = new ApiFilms(config);
+  const apiMain = new FakeApiMain(config);
+  const apiFilms = new FakeApiFilms(config);
+
   const [isNavtabOpened, setIsNavtabOpened] = useState(false);
   const [token, saveToken] = useStorageToken();
   const [currentUser, setCurrentUser] = useState({
@@ -38,6 +42,7 @@ export const App = ({ config }) => {
     token,
   });
 
+  const navigate = useNavigate();
   const location = useLocation();
   const isKnownRoute = location.pathname !== ROUTE.NOT_FOUND;
   const isLocationSign = location.pathname.includes('/sign');
@@ -82,10 +87,7 @@ export const App = ({ config }) => {
       apiMain.checkToken()
         .then((user) => {
           updateUser(user);
-          return apiFilms.getFilms();
         })
-        // eslint-disable-next-line no-console
-        .then(console.log)
         .catch(() => {
           updateUser(defaultUser);
           navigate(ROUTE.MAIN);
@@ -114,17 +116,31 @@ export const App = ({ config }) => {
 
         <Route
           path={ROUTE.SIGNUP}
-          element={<Register onRegister={onRegister} apiMain={apiMain} />}
+          element={(
+            <Register
+              onRegister={onRegister}
+              apiMain={apiMain}
+            />
+)}
         />
         <Route
           path={ROUTE.SIGNIN}
-          element={<Login onLogin={onLogin} apiMain={apiMain} />}
+          element={(
+            <Login
+              onLogin={onLogin}
+              apiMain={apiMain}
+            />
+)}
         />
         <Route
           path={ROUTE.PROFILE}
           element={(
             <ProtectedRoute>
-              <Profile onLogout={onLogout} onEdit={onEditProfile} apiMain={apiMain} />
+              <Profile
+                onLogout={onLogout}
+                onEdit={onEditProfile}
+                apiMain={apiMain}
+              />
             </ProtectedRoute>
           )}
         />
@@ -133,7 +149,10 @@ export const App = ({ config }) => {
           path={ROUTE.MOVIES}
           element={(
             <ProtectedRoute>
-              <Movies />
+              <Movies
+                apiMain={apiMain}
+                apiFilms={apiFilms}
+              />
             </ProtectedRoute>
           )}
         />

@@ -1,81 +1,51 @@
 import './MoviesCardList.css';
+import { useState, useEffect } from 'react';
 import { Preloader } from '../Preloader/Preloader';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
-import pepe from '../../../images/pepe-photo.png';
-import save from '../../../images/save.svg';
 
-const inc = (() => {
-  let i = 0;
-  return () => {
-    i += 1;
-    return i;
-  };
-})();
+const calcCardsCounter = () => {
+  const counter = { init: 12, more: 3 };
 
-const fullCards = [
-  {
-    id: inc(),
-    name: 'Лучшие мемы 2022',
-    duration: '20ч 22м',
-    cover: pepe,
-    saved: true,
-  },
-  {
-    id: inc(),
-    name: 'Супермегагиперпупернанодуперсверхкилотерра',
-    duration: '20ч 22м',
-    cover: save,
-    saved: true,
-  },
-  {
-    id: inc(),
-    name: 'Лучшие мемы 2022',
-    duration: '20ч 22м',
-    cover: pepe,
-    saved: false,
-  },
-  {
-    id: inc(),
-    name: 'Супермегагиперпупернанодуперсверхкилотерра',
-    duration: '20ч 22м',
-    cover: save,
-    saved: true,
-  },
-  {
-    id: inc(),
-    name: 'Лучшие мемы 2022',
-    duration: '20ч 22м',
-    cover: pepe,
-    saved: false,
-  },
-  {
-    id: inc(),
-    name: 'Супермегагиперпупернанодуперсверхкилотерра',
-    duration: '20ч 22м',
-    cover: save,
-    saved: true,
-  },
-];
-const emptyCards = [];
-const loadingCards = [null];
-const defaultCards = (() => {
-  const cards = [fullCards, emptyCards, loadingCards];
-  let i = 0;
-  return () => {
-    i += 1;
-    if (i >= cards.length) {
-      i = 0;
-    }
-    return cards[i];
-  };
-})();
+  if (window.innerWidth < 879) {
+    counter.init = 8;
+    counter.more = 2;
+  }
+  if (window.innerWidth < 481) {
+    counter.init = 5;
+    counter.more = 1;
+  }
 
-export const MoviesCardList = ({ cards = defaultCards() }) => {
+  return counter;
+};
+
+export const MoviesCardList = ({ apiFilms }) => {
+  const [cards, setCards] = useState([null]);
+  const [hasMoreCards, setHasMoreCards] = useState(false);
   const isEmpty = cards.length === 0;
-  const isLoading = !isEmpty
-    && (cards.length === 1)
-    && (cards[0] === null);
-  const hasCards = !isEmpty && !isLoading;
+  const isInitLoading = (cards.length === 1) && (cards[0] === null);
+  const [isLoading, setIsLoading] = useState(isInitLoading);
+  const hasCards = !isEmpty && !isInitLoading;
+
+  useEffect(() => {
+    apiFilms
+      .load()
+      .then(() => apiFilms.get(calcCardsCounter().init))
+      .then((initCards) => {
+        setCards(() => initCards);
+        setIsLoading(false);
+        setHasMoreCards(apiFilms.hasMore());
+      });
+  }, []);
+
+  const onClickMore = () => {
+    setIsLoading(true);
+    apiFilms.get(calcCardsCounter().more)
+      .then((newCards) => {
+        setCards((oldCards) => oldCards.concat(newCards));
+        setIsLoading(false);
+        setHasMoreCards(apiFilms.hasMore());
+      });
+  };
 
   return (
     <article className="article movies" aria-label="Все роллы">
@@ -84,13 +54,16 @@ export const MoviesCardList = ({ cards = defaultCards() }) => {
         <ul className="cards">
           {cards.map((card) => <MoviesCard key={card.id} card={card} />)}
         </ul>
-        <button
-          type="button"
-          className="animation button movies__more"
-          disabled={isLoading}
-        >
-          Ещё
-        </button>
+        {hasMoreCards && (
+          <button
+            type="button"
+            className="animation button movies__more"
+            disabled={isLoading}
+            onClick={onClickMore}
+          >
+            Ещё
+          </button>
+        )}
       </>
       )}
       {isLoading && (

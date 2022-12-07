@@ -12,13 +12,15 @@ export const useForm = (
   const process = (e) => {
     const {
       name,
+      type,
       value,
+      checked,
       validationMessage = '',
     } = e.target;
 
     setValues({
       ...values,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     });
     setErrors({
       ...errors,

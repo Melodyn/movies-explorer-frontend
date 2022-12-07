@@ -91,6 +91,11 @@
   object-fit: cover;
 }
 
+.card__link {
+  padding: 0;
+  margin: 0;
+}
+
 @media screen and (max-width: 879px) {
   .card {
     max-height: 258px;
