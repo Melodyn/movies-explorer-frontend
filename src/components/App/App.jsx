@@ -101,11 +101,11 @@ export const App = ({ config }) => {
   return (
     <UserContext.Provider value={currentUser}>
       {mustShowAppComponents && (
-      <Header
-        onClickBurger={() => setIsNavtabOpened(true)}
-      >
-        <Navigation place="header" />
-      </Header>
+        <Header
+          onClickBurger={() => setIsNavtabOpened(true)}
+        >
+          <Navigation place="header" />
+        </Header>
       )}
 
       <Routes>
@@ -121,7 +121,7 @@ export const App = ({ config }) => {
               onRegister={onRegister}
               apiMain={apiMain}
             />
-)}
+          )}
         />
         <Route
           path={ROUTE.SIGNIN}
@@ -130,7 +130,7 @@ export const App = ({ config }) => {
               onLogin={onLogin}
               apiMain={apiMain}
             />
-)}
+          )}
         />
         <Route
           path={ROUTE.PROFILE}
@@ -176,10 +176,10 @@ export const App = ({ config }) => {
       </Routes>
 
       {mustShowAppComponents && (
-      <NavTab
-        isOpen={isNavtabOpened}
-        onClose={() => setIsNavtabOpened(false)}
-      />
+        <NavTab
+          isOpen={isNavtabOpened}
+          onClose={() => setIsNavtabOpened(false)}
+        />
       )}
 
       {mustShowAppComponents && !isLocationProfile && <Footer />}

@@ -33,7 +33,7 @@ export const MoviesCard = ({ card = {} }) => {
             aria-label="Избранное"
           />
         </div>
-        <a href={card.trailerLink} target="_blank" className="card__link">
+        <a href={card.trailerLink} target="_blank" className="card__link" rel="noreferrer">
           <img className="card__image" src={card.cover} alt={card.name} />
         </a>
       </section>

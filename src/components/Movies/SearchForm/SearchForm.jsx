@@ -21,11 +21,7 @@ export const SearchForm = ({ onSearch, searchParams }) => {
     setValues(e);
   };
 
-  const onSubmit = setSubmitHandler((data) => new Promise((res) => {
-    setTimeout(() => {
-      res(onSearch(data));
-    }, 5000);
-  }));
+  const onSubmit = setSubmitHandler(onSearch);
 
   useEffect(() => {
     resetValues(searchParams);

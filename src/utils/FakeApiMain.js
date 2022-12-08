@@ -12,11 +12,11 @@ export class FakeApiMain {
     };
   }
 
-  setAvatar({ avatar }) {
+  setAvatar() {
     return this.getProfile();
   }
 
-  setInfo({ name, email }) {
+  setInfo() {
     return this.getProfile();
   }
 
@@ -29,11 +29,11 @@ export class FakeApiMain {
     return this.getProfile();
   }
 
-  async login({ password, email }) {
+  async login() {
     return { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhhZGM1OGVlYTI3MTY0NDRjMGY3Y2IiLCJpYXQiOjE2NzAwNDQ3NjIsImV4cCI6MTY3MDY0OTU2Mn0.go_5GSmFAM-HDPgCgELP65OVskpsW-DHlk8DWpGMq4U' };
   }
 
-  register({ password, email, name }) {
+  register() {
     return this.getProfile();
   }
 }

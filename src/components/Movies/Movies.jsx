@@ -9,6 +9,7 @@ export const Movies = ({ apiMain, apiFilms }) => {
     shorts: (localStorage.getItem('search_shorts') || false) === 'true',
   };
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
+
   const onSearch = async (newParams) => {
     const updatedParams = {
       ...searchParams,
@@ -24,6 +25,7 @@ export const Movies = ({ apiMain, apiFilms }) => {
       <SearchForm onSearch={onSearch} searchParams={searchParams} />
       <MoviesCardList
         apiFilms={apiFilms}
+        apiMain={apiMain}
         searchParams={searchParams}
       />
     </main>

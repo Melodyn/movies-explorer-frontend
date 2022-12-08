@@ -6,6 +6,7 @@ export class FakeApiFilms {
   constructor(config) {
     this._config = config;
     this._films = [];
+    this._searchResults = [];
     this._chunkSize = 3;
     this._cursor = 0;
   }
@@ -14,7 +15,7 @@ export class FakeApiFilms {
     this._films = fixtureFilms.map((film) => {
       film.cover = this.buildCoverLink(film);
       return film;
-    }).slice(0, 16);
+    });
   }
 
   setChunkSize(size) {
@@ -23,24 +24,41 @@ export class FakeApiFilms {
 
   resetCursor() {
     this._cursor = 0;
+    this._searchResults = [];
   }
 
   hasMore() {
-    return (this._cursor < this._films.length);
+    return (this._cursor < this._searchResults.length);
   }
 
-  buildCoverLink(card) {
-    return [pepe, save][Math.round(Math.random())];
+  buildCoverLink() {
+    const covers = [pepe, save];
+    const randIdx = Math.round(Math.random());
+    return covers[randIdx];
   }
 
-  async get(size = 0) {
+  async get({
+    size = 0,
+    film,
+    shorts,
+  }) {
     const chunkSize = size === 0 ? this._chunkSize : size;
     const startIdx = this._cursor;
     const endIdx = startIdx + chunkSize;
 
-    const films = this._films.slice(startIdx, endIdx);
+    this._searchResults = this._films
+      .filter((item) => {
+        const { nameRU, duration } = item;
+        if (shorts && duration > 40) {
+          return false;
+        }
+        return nameRU
+          .toLowerCase()
+          .includes(film.toLowerCase());
+      });
+    const films = this._searchResults.slice(startIdx, endIdx);
 
-    if (startIdx < this._films.length) {
+    if (startIdx < this._searchResults.length) {
       this._cursor += chunkSize;
     }
 

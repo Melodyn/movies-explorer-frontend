@@ -18,7 +18,7 @@ const calcCardsCounter = () => {
   return counter;
 };
 
-export const MoviesCardList = ({ apiFilms }) => {
+export const MoviesCardList = ({ apiFilms, searchParams }) => {
   const [cards, setCards] = useState([null]);
   const [hasMoreCards, setHasMoreCards] = useState(false);
   const isEmpty = cards.length === 0;
@@ -27,11 +27,31 @@ export const MoviesCardList = ({ apiFilms }) => {
   const hasCards = !isEmpty && !isInitLoading;
 
   useEffect(() => {
+    const cardsCounter = calcCardsCounter();
+    apiFilms.resetCursor();
+
+    apiFilms
+      .get({
+        size: cardsCounter.init,
+        ...searchParams,
+      })
+      .then((allCards) => {
+        setCards(() => allCards);
+        setIsLoading(false);
+        setHasMoreCards(apiFilms.hasMore());
+      });
+  }, Object.values(searchParams));
+
+  useEffect(() => {
+    const cardsCounter = calcCardsCounter();
     apiFilms
       .load()
-      .then(() => apiFilms.get(calcCardsCounter().init))
-      .then((initCards) => {
-        setCards(() => initCards);
+      .then(() => apiFilms.get({
+        size: cardsCounter.init,
+        ...searchParams,
+      }))
+      .then((allCards) => {
+        setCards(() => allCards);
         setIsLoading(false);
         setHasMoreCards(apiFilms.hasMore());
       });
@@ -39,7 +59,11 @@ export const MoviesCardList = ({ apiFilms }) => {
 
   const onClickMore = () => {
     setIsLoading(true);
-    apiFilms.get(calcCardsCounter().more)
+    const cardsCounter = calcCardsCounter();
+    apiFilms.get({
+      size: cardsCounter.more,
+      ...searchParams,
+    })
       .then((newCards) => {
         setCards((oldCards) => oldCards.concat(newCards));
         setIsLoading(false);
@@ -50,27 +74,27 @@ export const MoviesCardList = ({ apiFilms }) => {
   return (
     <article className="article movies" aria-label="Все роллы">
       {hasCards && (
-      <>
-        <ul className="cards">
-          {cards.map((card) => <MoviesCard key={card.id} card={card} />)}
-        </ul>
-        {hasMoreCards && (
-          <button
-            type="button"
-            className="animation button movies__more"
-            disabled={isLoading}
-            onClick={onClickMore}
-          >
-            Ещё
-          </button>
-        )}
-      </>
+        <>
+          <ul className="cards">
+            {cards.map((card) => <MoviesCard key={card.id} card={card} />)}
+          </ul>
+          {hasMoreCards && (
+            <button
+              type="button"
+              className="animation button movies__more"
+              disabled={isLoading}
+              onClick={onClickMore}
+            >
+              Ещё
+            </button>
+          )}
+        </>
       )}
       {isLoading && (
-      <>
-        <Preloader />
-        <p className="movies__load-info">Загрузка...</p>
-      </>
+        <>
+          <Preloader />
+          <p className="movies__load-info">Загрузка...</p>
+        </>
       )}
       {isEmpty && <p className="movies__load-info">Ничего не найдено</p>}
     </article>

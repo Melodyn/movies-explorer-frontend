@@ -59,12 +59,31 @@ export class ApiFilms {
     return `${this._config.filmsBaseURL}${card.image.url}`;
   }
 
-  async get(size = 0) {
+  async get({
+    size = 0,
+    film,
+    shorts,
+  }) {
     const chunkSize = size === 0 ? this._chunkSize : size;
-    const films = this._films.slice(this._cursor, chunkSize);
-    if (this._cursor < this._films.length) {
+    const startIdx = this._cursor;
+    const endIdx = startIdx + chunkSize;
+
+    this._searchResults = this._films
+      .filter((filmm) => {
+        const { nameRU, duration } = filmm;
+        if (shorts && duration > 40) {
+          return false;
+        }
+        return nameRU
+          .toLowerCase()
+          .includes(film.toLowerCase());
+      });
+    const films = this._searchResults.slice(startIdx, endIdx);
+
+    if (startIdx < this._searchResults.length) {
       this._cursor += chunkSize;
     }
+
     return films;
   }
 }
