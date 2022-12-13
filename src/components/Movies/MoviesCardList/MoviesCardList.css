@@ -16,6 +16,10 @@
   list-style-type: none;
 }
 
+.cards__item {
+  max-width: 558px;
+}
+
 .movies__more {
   width: 320px;
   height: 36px;
@@ -26,15 +30,6 @@
   font-weight: 500;
 }
 
-.movies__load-info {
-  padding: 0;
-  margin: 0;
-  color: #a0a0a0;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-}
-
 @media screen and (max-width: 879px) {
   .article {
     padding: 70px 30px 80px;
@@ -43,7 +38,7 @@
 
 @media screen and (max-width: 767px) {
   .cards {
-    max-width: 400px;
+    max-width: 558px;
     margin: 0 auto;
     grid-template-columns: minmax(284px, 1fr);
   }

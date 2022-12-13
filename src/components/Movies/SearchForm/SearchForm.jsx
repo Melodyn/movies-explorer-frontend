@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import { useForm } from '../../../hooks/useForm';
 
 export const SearchForm = ({ onSearch, searchParams }) => {
+  const { isLoading, ...params } = searchParams;
   const formRef = useRef(null);
   const {
     values,
@@ -12,7 +13,7 @@ export const SearchForm = ({ onSearch, searchParams }) => {
     setValues,
     setSubmitHandler,
     resetValues,
-  } = useForm(formRef, searchParams);
+  } = useForm(formRef, params);
 
   const onChange = (e) => {
     localStorage.setItem(`search_${e.target.name}`, e.target.type === 'checkbox'
@@ -46,25 +47,26 @@ export const SearchForm = ({ onSearch, searchParams }) => {
             name="film"
             minLength={3}
             value={values.film}
-            disabled={isLocked}
+            disabled={isLocked || isLoading}
             onChange={onChange}
+            required
           />
           <button
             className="animation button search-form__button"
             type="submit"
             aria-label="Найти"
-            disabled={isLocked}
+            disabled={isLocked || isLoading}
           />
         </fieldset>
         <fieldset className="search__fields search__fields_type_shorts">
           <div className="shorts-switch">
             <input
-              className="shorts-switch__checkbox"
+              className="shorts-switch__checkbox form-field"
               type="checkbox"
               id="shorts"
               name="shorts"
               checked={values.shorts}
-              disabled={isLocked}
+              disabled={isLocked || isLoading}
               onChange={onChange}
             />
             <label className="shorts-switch__label" htmlFor="shorts" />

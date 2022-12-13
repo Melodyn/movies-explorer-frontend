@@ -6,6 +6,7 @@ export class FakeApiFilms {
   constructor(config) {
     this._config = config;
     this._films = [];
+    this._wasLoaded = false;
     this._searchResults = [];
     this._chunkSize = 3;
     this._cursor = 0;
@@ -42,6 +43,16 @@ export class FakeApiFilms {
     film,
     shorts,
   }) {
+    if (!this._wasLoaded) {
+      try {
+        await this.load();
+        this._wasLoaded = true;
+      } catch (err) {
+        this._wasLoaded = false;
+        throw err;
+      }
+    }
+
     const chunkSize = size === 0 ? this._chunkSize : size;
     const startIdx = this._cursor;
     const endIdx = startIdx + chunkSize;
