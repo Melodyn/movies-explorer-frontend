@@ -24,7 +24,6 @@ import { NavTab } from '../Main/NavTab/NavTab';
 import { NotFound } from '../NotFound/NotFound';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
-import { SavedMovies } from '../Movies/SavedMovies/SavedMovies';
 import { Register } from '../Register/Register';
 import { Login } from '../Login/Login';
 import { Profile } from '../Profile/Profile';
@@ -152,6 +151,7 @@ export const App = ({ config }) => {
               <Movies
                 apiMain={apiMain}
                 apiFilms={apiFilms}
+                isPageSaved={false}
               />
             </ProtectedRoute>
           )}
@@ -160,7 +160,11 @@ export const App = ({ config }) => {
           path={ROUTE.MOVIES_SAVED}
           element={(
             <ProtectedRoute>
-              <SavedMovies />
+              <Movies
+                apiMain={apiMain}
+                apiFilms={apiFilms}
+                isPageSaved
+              />
             </ProtectedRoute>
           )}
         />

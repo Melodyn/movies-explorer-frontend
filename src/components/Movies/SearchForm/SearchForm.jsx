@@ -4,7 +4,7 @@ import './SearchForm.css';
 import { useEffect, useRef } from 'react';
 import { useForm } from '../../../hooks/useForm';
 
-export const SearchForm = ({ onSearch, searchParams }) => {
+export const SearchForm = ({ onSearch, searchParams, required }) => {
   const { isLoading, ...params } = searchParams;
   const formRef = useRef(null);
   const {
@@ -27,7 +27,7 @@ export const SearchForm = ({ onSearch, searchParams }) => {
 
   useEffect(() => {
     resetValues(searchParams);
-  }, Object.values(searchParams));
+  }, Object.values(searchParams).concat(required));
 
   return (
     <article className="article search" aria-label="Поиск роллов">
@@ -51,7 +51,7 @@ export const SearchForm = ({ onSearch, searchParams }) => {
               value={values.film}
               disabled={isLocked || isLoading}
               onChange={onChange}
-              required
+              required={required}
             />
             <button
               className="animation button search-form__button"

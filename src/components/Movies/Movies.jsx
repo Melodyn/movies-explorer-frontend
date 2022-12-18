@@ -1,8 +1,10 @@
 import './Movies.css';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { SearchForm } from './SearchForm/SearchForm';
 import { MoviesCardList } from './MoviesCardList/MoviesCardList';
 import { PreloaderContainer } from './PreloaderContainer/PreloaderContainer';
+import { ROUTE } from '../../utils/constants';
 
 const calcCardsCounter = () => {
   const counter = { init: 12, more: 3 };
@@ -20,9 +22,14 @@ const calcCardsCounter = () => {
 };
 
 export const Movies = ({ apiFilms, apiMain }) => {
-  const savedFilmSearch = (localStorage.getItem('search_film') || '');
-  const savedShortsSearch = (localStorage.getItem('search_shorts') || false);
+  const location = useLocation();
+  const isPageSaved = (location.pathname === ROUTE.MOVIES_SAVED);
+  const lsKeyNameFilm = `search_film${isPageSaved ? '_saved' : ''}`;
+  const lsKeyNameShorts = `search_shorts${isPageSaved ? '_saved' : ''}`;
+  const savedFilmSearch = (localStorage.getItem(lsKeyNameFilm) || '');
+  const savedShortsSearch = (localStorage.getItem(lsKeyNameShorts) || false);
   const hasSavedSearch = savedFilmSearch.length > 0;
+  // TODO: при переходе между страницами не стирается поисковый запрос
   const defaultSearchParams = {
     film: savedFilmSearch,
     shorts: (savedShortsSearch === 'true'),
@@ -32,7 +39,7 @@ export const Movies = ({ apiFilms, apiMain }) => {
   const [searchWasInit, setSearchWasInit] = useState(hasSavedSearch);
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [apiHasError, setApiHasError] = useState(false);
-  const isEmpty = cards.length === 0;
+  const isEmpty = (cards.length === 0);
 
   const onSearch = async (newParams) => {
     const updatedParams = {
@@ -40,9 +47,9 @@ export const Movies = ({ apiFilms, apiMain }) => {
       ...newParams,
       isLoading: true,
     };
-    localStorage.setItem('search_film', updatedParams.film);
-    localStorage.setItem('search_shorts', updatedParams.shorts);
-    if (!searchWasInit) setSearchWasInit(true);
+    localStorage.setItem(lsKeyNameFilm, updatedParams.film);
+    localStorage.setItem(lsKeyNameShorts, updatedParams.shorts);
+    if (!searchWasInit && !isPageSaved) setSearchWasInit(true);
     setSearchParams(() => updatedParams);
   };
 
@@ -50,21 +57,22 @@ export const Movies = ({ apiFilms, apiMain }) => {
     setSearchParams((params) => ({ ...params, isLoading: false }));
   };
 
-  const updateFilmsChunk = (reset = false) => {
+  const updateBeatFilmsChunk = (reset = false) => {
     const cardsCounter = calcCardsCounter();
     let size = cardsCounter.more;
     if (reset) {
       apiFilms.resetCursor();
+      apiMain.resetCursor();
       size = cardsCounter.init;
     }
 
-    Promise.all([
-      apiFilms.get({
-        ...searchParams,
-        size,
-      }),
-      apiMain.load(),
-    ])
+    apiFilms.get({
+      ...searchParams,
+      size,
+    })
+      .then((newCards) => Promise
+        .all(newCards.map(({ movieId }) => apiMain.get({ ...searchParams, id: movieId, size })))
+        .then((savedCards) => [newCards, savedCards.flat()]))
       .then(([newCards, savedCards]) => {
         const savedCardsSet = new Set(savedCards.map((card) => card.movieId));
         const updatedCards = newCards.map((card) => ({ ...card, saved: savedCardsSet.has(card.movieId) }));
@@ -85,6 +93,37 @@ export const Movies = ({ apiFilms, apiMain }) => {
       });
   };
 
+  const updateSavedFilmsChunk = (reset = false) => {
+    const cardsCounter = calcCardsCounter();
+    let size = cardsCounter.more;
+    if (reset) {
+      apiMain.resetCursor();
+      size = cardsCounter.init;
+    }
+
+    apiMain.get({
+      ...searchParams,
+      size,
+    })
+      .then((updatedCards) => {
+        if (reset) {
+          setCards(() => updatedCards);
+        } else {
+          setCards((prev) => prev.concat(updatedCards));
+        }
+
+        setApiHasError(false);
+        onEndSearch();
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiHasError(true);
+        onEndSearch();
+      });
+  };
+
+  const updateFilmsChunk = isPageSaved ? updateSavedFilmsChunk : updateBeatFilmsChunk;
+
   const loadMore = () => {
     setSearchParams((params) => ({ ...params, isLoading: true }));
     updateFilmsChunk();
@@ -103,21 +142,20 @@ export const Movies = ({ apiFilms, apiMain }) => {
   };
 
   useEffect(() => {
-    if (searchWasInit && !searchParams.isLoading) {
+    const searchAccepted = isPageSaved || searchWasInit;
+    if (searchAccepted && !searchParams.isLoading) {
       setSearchParams((params) => ({ ...params, isLoading: true }));
     }
 
-    setTimeout(() => {
-      if (searchWasInit) {
-        updateFilmsChunk('reset');
-      }
-    }, 500);
-  }, [searchWasInit, searchParams.film, searchParams.shorts]);
+    if (searchAccepted) {
+      updateFilmsChunk('reset');
+    }
+  }, [searchWasInit, isPageSaved, searchParams.film, searchParams.shorts]);
 
   return (
     <main className="main">
-      <SearchForm onSearch={onSearch} searchParams={searchParams} />
-      {searchWasInit && searchParams.isLoading && (
+      <SearchForm onSearch={onSearch} searchParams={searchParams} required={!isPageSaved} />
+      {searchParams.isLoading && (
         <PreloaderContainer />
       )}
       <MoviesCardList
@@ -127,7 +165,7 @@ export const Movies = ({ apiFilms, apiMain }) => {
         hasMore={apiFilms.hasMore()}
         isEmpty={isEmpty}
         isLoading={searchParams.isLoading}
-        searchWasInit={searchWasInit}
+        searchAccepted={isPageSaved || searchWasInit}
         apiHasError={apiHasError}
       />
     </main>

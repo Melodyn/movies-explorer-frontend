@@ -8,12 +8,12 @@ export const MoviesCardList = ({
   hasMore,
   isEmpty,
   isLoading,
-  searchWasInit,
+  searchAccepted,
   apiHasError,
 }) => (!isLoading
   && (
     <article className="article movies" aria-label="Все роллы">
-      {searchWasInit && !apiHasError && !isEmpty && (
+      {searchAccepted && !apiHasError && !isEmpty && (
         <>
           <ul className="cards">
             {cards.map((card) => <MoviesCard key={card.movieId} card={card} onClickSave={onClickSave} />)}
@@ -30,7 +30,7 @@ export const MoviesCardList = ({
           )}
         </>
       )}
-      {searchWasInit && !apiHasError && isEmpty && <p className="movies__load-info">Ничего не найдено</p>}
+      {searchAccepted && !apiHasError && isEmpty && <p className="movies__load-info">Ничего не найдено</p>}
       {apiHasError && <p className="movies__load-info">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</p>}
     </article>
   )

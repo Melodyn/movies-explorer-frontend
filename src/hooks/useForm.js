@@ -59,6 +59,9 @@ export const useForm = (
     isLocked,
     setValues: process,
     setSubmitHandler,
-    resetValues: setValues,
+    resetValues: (newValues) => {
+      setValues(newValues);
+      setValid(checkValidity());
+    },
   };
 };

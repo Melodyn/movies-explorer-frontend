@@ -13,10 +13,13 @@ export class FakeApiFilms {
   }
 
   async load() {
-    this._films = fixtureFilms.map((film) => {
-      film.cover = this.buildCoverLink(film);
-      return film;
-    });
+    if (!this._wasLoaded) {
+      this._films = fixtureFilms.map((film) => {
+        film.cover = this.buildCoverLink(film);
+        return film;
+      });
+      this._wasLoaded = true;
+    }
   }
 
   setChunkSize(size) {
@@ -40,18 +43,10 @@ export class FakeApiFilms {
 
   async get({
     size = 0,
-    film,
-    shorts,
+    film = '',
+    shorts = false,
   }) {
-    if (!this._wasLoaded) {
-      try {
-        await this.load();
-        this._wasLoaded = true;
-      } catch (err) {
-        this._wasLoaded = false;
-        throw err;
-      }
-    }
+    await this.load();
 
     const chunkSize = size === 0 ? this._chunkSize : size;
     const startIdx = this._cursor;
@@ -59,15 +54,24 @@ export class FakeApiFilms {
 
     this._searchResults = this._films
       .filter((item) => {
-        const { nameRU, duration } = item;
+        const {
+          nameRU = '',
+          nameEN = '',
+          duration,
+        } = item;
+
         if (shorts && duration > 40) {
           return false;
         }
-        return nameRU
+
+        return `${nameRU}${nameEN}`
           .toLowerCase()
           .includes(film.toLowerCase());
       });
-    const films = this._searchResults.slice(startIdx, endIdx);
+
+    const films = (this._searchResults.length > 1)
+      ? this._searchResults.slice(startIdx, endIdx)
+      : this._searchResults;
 
     if (startIdx < this._searchResults.length) {
       this._cursor += chunkSize;

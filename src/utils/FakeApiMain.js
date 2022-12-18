@@ -6,8 +6,11 @@ export class FakeApiMain {
       name: 'test@test.com',
       email: 'test@test.com',
     };
-    this._wasLoaded = false;
     this._cards = [];
+    this._searchResults = [];
+    this._wasLoaded = false;
+    this._chunkSize = 3;
+    this._cursor = 0;
   }
 
   /* profile */
@@ -41,28 +44,81 @@ export class FakeApiMain {
   }
 
   /* cards */
+  setChunkSize(size) {
+    this._chunkSize = size;
+  }
+
+  resetCursor() {
+    this._cursor = 0;
+    this._searchResults = [];
+  }
+
+  hasMore() {
+    return (this._cursor < this._searchResults.length);
+  }
+
   async load() {
     if (!this._wasLoaded) {
       const savedCards = localStorage.getItem('savedCards') || '[]';
       this._cards = JSON.parse(savedCards);
       this._wasLoaded = true;
     }
-    return this._cards;
+  }
+
+  async get({
+    size = 0,
+    film = '',
+    shorts = false,
+    id = null,
+  }) {
+    await this.load();
+
+    const chunkSize = size === 0 ? this._chunkSize : size;
+    const startIdx = this._cursor;
+    const endIdx = startIdx + chunkSize;
+
+    this._searchResults = this._cards
+      .filter((item) => {
+        const {
+          nameRU = '',
+          nameEN = '',
+          duration,
+          movieId,
+        } = item;
+
+        if (shorts && duration > 40) {
+          return false;
+        }
+
+        if (id && id === movieId) {
+          return true;
+        }
+
+        return `${nameRU}${nameEN}`
+          .toLowerCase()
+          .includes(film.toLowerCase());
+      });
+
+    const cards = (this._searchResults.length > 1)
+      ? this._searchResults.slice(startIdx, endIdx)
+      : this._searchResults;
+
+    if (startIdx < this._searchResults.length) {
+      this._cursor += chunkSize;
+    }
+
+    return cards;
   }
 
   async saveOrRemove(card) {
-    return new Promise((res) => {
-      setTimeout(() => {
-        const { saved = false, ...fields } = card;
-        const updatedCard = saved ? fields : ({ ...fields, saved: true });
-        if (saved) {
-          this._cards = this._cards.filter((crd) => (crd.movieId !== fields.movieId));
-        } else {
-          this._cards = this._cards.concat(updatedCard);
-        }
-        localStorage.setItem('savedCards', JSON.stringify(this._cards));
-        res(updatedCard);
-      }, 500);
-    });
+    const { saved = false, ...fields } = card;
+    const updatedCard = saved ? fields : ({ ...fields, saved: true });
+    if (saved) {
+      this._cards = this._cards.filter((crd) => (crd.movieId !== fields.movieId));
+    } else {
+      this._cards = this._cards.concat(updatedCard);
+    }
+    localStorage.setItem('savedCards', JSON.stringify(this._cards));
+    return updatedCard;
   }
 }
