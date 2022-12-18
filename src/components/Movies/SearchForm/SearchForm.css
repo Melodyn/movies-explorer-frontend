@@ -3,7 +3,7 @@
   flex-direction: column;
   padding-top: 70px;
   padding-bottom: 10px;
-  gap: 70px;
+  gap: 45px;
 }
 
 .search-delimiter {
@@ -98,6 +98,18 @@
 .search__fields_type_shorts {
   padding-left: 30px;
   background-color: #f9f9f9;
+}
+
+.search-form__error {
+  display: block;
+  height: 25px;
+  box-sizing: border-box;
+  padding: 10px 0 0;
+  margin: 0;
+  color: #ee3465;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: pre;
 }
 
 /* switch */

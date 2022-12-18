@@ -19,16 +19,19 @@ const calcCardsCounter = () => {
   return counter;
 };
 
-// TODO: сделать обработку ошибок и показ в интерфейсе
-export const Movies = ({ apiFilms }) => {
+export const Movies = ({ apiFilms, apiMain }) => {
+  const savedFilmSearch = (localStorage.getItem('search_film') || '');
+  const savedShortsSearch = (localStorage.getItem('search_shorts') || false);
+  const hasSavedSearch = savedFilmSearch.length > 0;
   const defaultSearchParams = {
-    film: localStorage.getItem('search_film') || '',
-    shorts: (localStorage.getItem('search_shorts') || false) === 'true',
+    film: savedFilmSearch,
+    shorts: (savedShortsSearch === 'true'),
     isLoading: false,
   };
   const [cards, setCards] = useState([]);
-  const [searchWasInit, setSearchWasInit] = useState(false);
+  const [searchWasInit, setSearchWasInit] = useState(hasSavedSearch);
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
+  const [apiHasError, setApiHasError] = useState(false);
   const isEmpty = cards.length === 0;
 
   const onSearch = async (newParams) => {
@@ -55,27 +58,48 @@ export const Movies = ({ apiFilms }) => {
       size = cardsCounter.init;
     }
 
-    apiFilms
-      .get({
+    Promise.all([
+      apiFilms.get({
         ...searchParams,
         size,
-      })
-      .then((newCards) => {
+      }),
+      apiMain.load(),
+    ])
+      .then(([newCards, savedCards]) => {
+        const savedCardsSet = new Set(savedCards.map((card) => card.movieId));
+        const updatedCards = newCards.map((card) => ({ ...card, saved: savedCardsSet.has(card.movieId) }));
+
         if (reset) {
-          setCards(() => newCards);
+          setCards(() => updatedCards);
         } else {
-          setCards((prev) => prev.concat(newCards));
+          setCards((prev) => prev.concat(updatedCards));
         }
+
+        setApiHasError(false);
         onEndSearch();
       })
       .catch((err) => {
         console.error(err);
+        setApiHasError(true);
+        onEndSearch();
       });
   };
 
   const loadMore = () => {
     setSearchParams((params) => ({ ...params, isLoading: true }));
     updateFilmsChunk();
+  };
+
+  const onClickSave = (film, onEnd) => {
+    apiMain.saveOrRemove(film)
+      .then((updatedFilm) => {
+        setCards((crds) => crds.map((flm) => (flm.movieId === updatedFilm.movieId ? updatedFilm : flm)));
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiHasError(true);
+      })
+      .finally(onEnd);
   };
 
   useEffect(() => {
@@ -87,7 +111,7 @@ export const Movies = ({ apiFilms }) => {
       if (searchWasInit) {
         updateFilmsChunk('reset');
       }
-    }, 5000);
+    }, 500);
   }, [searchWasInit, searchParams.film, searchParams.shorts]);
 
   return (
@@ -99,10 +123,12 @@ export const Movies = ({ apiFilms }) => {
       <MoviesCardList
         cards={cards}
         loadMore={loadMore}
+        onClickSave={onClickSave}
         hasMore={apiFilms.hasMore()}
         isEmpty={isEmpty}
         isLoading={searchParams.isLoading}
         searchWasInit={searchWasInit}
+        apiHasError={apiHasError}
       />
     </main>
   );

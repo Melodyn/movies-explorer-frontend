@@ -9,6 +9,7 @@ export const SearchForm = ({ onSearch, searchParams }) => {
   const formRef = useRef(null);
   const {
     values,
+    isValid,
     isLocked,
     setValues,
     setSubmitHandler,
@@ -30,52 +31,57 @@ export const SearchForm = ({ onSearch, searchParams }) => {
 
   return (
     <article className="article search" aria-label="Поиск роллов">
-      <form
-        action="/"
-        name="search"
-        className="search-form"
-        onSubmit={onSubmit}
-        ref={formRef}
-      >
-        <fieldset className="search__fields search__fields_type_film">
-          <label className="search-form__label" htmlFor="film" />
-          <input
-            className="search-form__input form-field"
-            type="text"
-            placeholder="Ролл"
-            id="film"
-            name="film"
-            minLength={3}
-            value={values.film}
-            disabled={isLocked || isLoading}
-            onChange={onChange}
-            required
-          />
-          <button
-            className="animation button search-form__button"
-            type="submit"
-            aria-label="Найти"
-            disabled={isLocked || isLoading}
-          />
-        </fieldset>
-        <fieldset className="search__fields search__fields_type_shorts">
-          <div className="shorts-switch">
+      <div>
+        <form
+          action="/"
+          name="search"
+          className="search-form"
+          onSubmit={onSubmit}
+          ref={formRef}
+        >
+          <fieldset className="search__fields search__fields_type_film">
+            <label className="search-form__label" htmlFor="film" />
             <input
-              className="shorts-switch__checkbox form-field"
-              type="checkbox"
-              id="shorts"
-              name="shorts"
-              checked={values.shorts}
+              className="search-form__input form-field"
+              type="text"
+              placeholder="Ролл"
+              id="film"
+              name="film"
+              minLength={1}
+              value={values.film}
               disabled={isLocked || isLoading}
               onChange={onChange}
+              required
             />
-            <label className="shorts-switch__label" htmlFor="shorts" />
-            <label className="shorts-switch__text" htmlFor="shorts">
-              Короткометражки
-            </label>
-          </div>
-        </fieldset>
-      </form>
+            <button
+              className="animation button search-form__button"
+              type="submit"
+              aria-label="Найти"
+              disabled={!isValid || isLocked || isLoading}
+            />
+          </fieldset>
+          <fieldset className="search__fields search__fields_type_shorts">
+            <div className="shorts-switch">
+              <input
+                className="shorts-switch__checkbox form-field"
+                type="checkbox"
+                id="shorts"
+                name="shorts"
+                checked={values.shorts}
+                disabled={isLocked || isLoading}
+                onChange={onChange}
+              />
+              <label className="shorts-switch__label" htmlFor="shorts" />
+              <label className="shorts-switch__text" htmlFor="shorts">
+                Короткометражки
+              </label>
+            </div>
+          </fieldset>
+        </form>
+        <span className="search-form__error">
+          {!isValid && 'Нужно ввести ключевое слово'}
+        </span>
+      </div>
       <hr className="search-delimiter" />
     </article>
   );

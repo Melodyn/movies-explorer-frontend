@@ -1,0 +1,74 @@
+[
+  {
+    "type": "down",
+    "name": {
+      "key_code": "grave_accent_and_tilde"
+    },
+    "usagePage": "7 (0x0007)",
+    "usage": "53 (0x0035)",
+    "misc": ""
+  },
+  {
+    "type": "up",
+    "name": {
+      "key_code": "grave_accent_and_tilde"
+    },
+    "usagePage": "7 (0x0007)",
+    "usage": "53 (0x0035)",
+    "misc": ""
+  },
+  {
+    "type": "down",
+    "name": {
+      "key_code": "left_shift"
+    },
+    "usagePage": "7 (0x0007)",
+    "usage": "225 (0x00e1)",
+    "misc": "flags left_shift"
+  },
+  {
+    "type": "up",
+    "name": {
+      "key_code": "left_shift"
+    },
+    "usagePage": "7 (0x0007)",
+    "usage": "225 (0x00e1)",
+    "misc": ""
+  },
+  {
+    "type": "down",
+    "name": {
+      "pointing_button": "button1"
+    },
+    "usagePage": "9 (0x0009)",
+    "usage": "1 (0x0001)",
+    "misc": ""
+  },
+  {
+    "type": "up",
+    "name": {
+      "pointing_button": "button1"
+    },
+    "usagePage": "9 (0x0009)",
+    "usage": "1 (0x0001)",
+    "misc": ""
+  },
+  {
+    "type": "down",
+    "name": {
+      "pointing_button": "button1"
+    },
+    "usagePage": "9 (0x0009)",
+    "usage": "1 (0x0001)",
+    "misc": ""
+  },
+  {
+    "type": "up",
+    "name": {
+      "pointing_button": "button1"
+    },
+    "usagePage": "9 (0x0009)",
+    "usage": "1 (0x0001)",
+    "misc": ""
+  }
+]

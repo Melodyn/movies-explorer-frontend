@@ -59,7 +59,11 @@
   filter: drop-shadow(0 0 1px #ccc);
 }
 
-.card__button_type_save:hover {
+.card__button:disabled {
+  filter: grayscale(1);
+}
+
+.card__button_type_save:not(:disabled):hover {
   background-image: url('../../../images/saved.svg');
   opacity: .6;
 }
@@ -69,7 +73,7 @@
   filter: none;
 }
 
-.card__button_type_saved:hover {
+.card__button_type_saved:not(:disabled):hover {
   filter: grayscale(1);
 }
 

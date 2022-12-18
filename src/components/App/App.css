@@ -76,6 +76,10 @@
   cursor: pointer;
 }
 
+.button:disabled {
+  cursor: default;
+}
+
 .button_bg_accent {
   background-color: rgba(43 224 128 / 100%);
 }
@@ -107,7 +111,7 @@
   transition: .3s;
 }
 
-.animation:hover {
+.animation:not(:disabled):hover {
   opacity: .7;
 }
 

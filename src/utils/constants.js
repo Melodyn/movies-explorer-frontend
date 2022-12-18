@@ -33,7 +33,7 @@ export const ROUTE = Object.freeze({
 
 export const fixtureFilms = [
   {
-    id: 1,
+    movieId: 1,
     nameRU: '«Роллинг Стоунз» в изгнании',
     nameEN: 'Stones in Exile',
     director: 'Стивен Кайак ',
@@ -70,7 +70,7 @@ export const fixtureFilms = [
       updated_at: '2020-11-23T14:11:57.313Z',
     },
   }, {
-    id: 2,
+    movieId: 2,
     nameRU: "All Tomorrow's Parties",
     nameEN: "All Tomorrow's Parties",
     director: ' Джонатан Кауэтт',
@@ -107,7 +107,7 @@ export const fixtureFilms = [
       updated_at: '2020-11-23T14:14:08.595Z',
     },
   }, {
-    id: 3,
+    movieId: 3,
     nameRU: ' Без обратного пути',
     nameEN: 'No Distance Left to Run',
     director: 'Уилл Лавлейс, Дилан Сотерн',
@@ -141,7 +141,7 @@ export const fixtureFilms = [
       updated_at: '2020-11-23T14:17:01.702Z',
     },
   }, {
-    id: 4,
+    movieId: 4,
     nameRU: 'Bassweight',
     nameEN: 'Bassweight',
     director: 'Сурид Хассан',
@@ -175,7 +175,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T16:47:22.972Z',
     },
   }, {
-    id: 5,
+    movieId: 5,
     nameRU: 'Taqwacore: The Birth of Punk Islam',
     nameEN: 'Taqwacore: The Birth of Punk Islam',
     director: ' Омар Маджид',
@@ -212,7 +212,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T20:34:50.858Z',
     },
   }, {
-    id: 6,
+    movieId: 6,
     nameRU: 'Фавела на взрыве',
     nameEN: 'Favela on Blast',
     director: 'Уэсли Пенц',
@@ -249,7 +249,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T20:37:23.499Z',
     },
   }, {
-    id: 7,
+    movieId: 7,
     nameRU: 'Постеры, сошедшие со стен',
     nameEN: 'The Posters Came from the Walls',
     director: 'Джереми Деллер, Николас Абрахамс',
@@ -289,7 +289,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T20:39:50.486Z',
     },
   }, {
-    id: 8,
+    movieId: 8,
     nameRU: 'Soul Power',
     nameEN: 'Soul Power',
     director: 'Джеффри Леви-Хинте',
@@ -323,7 +323,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T20:57:25.729Z',
     },
   }, {
-    id: 9,
+    movieId: 9,
     nameRU: ' 196 ударов в минуту',
     nameEN: '196 BPM',
     director: 'Ромуальд Кармакар',
@@ -360,7 +360,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T20:59:37.364Z',
     },
   }, {
-    id: 10,
+    movieId: 10,
     nameRU: ' Hit So Hard: Школа жизни Патти Шемель',
     nameEN: 'Hit So Hard: The Life & Near Death Story of Patty Schemel',
     director: 'П.Дэвид Эберсол',
@@ -394,7 +394,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:01:43.016Z',
     },
   }, {
-    id: 11,
+    movieId: 11,
     nameRU: ' Баллада о Дженезисе и Леди Джей',
     nameEN: 'The Ballad of Genesis and Lady Jaye',
     director: 'Мари Лозье',
@@ -431,7 +431,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:03:33.524Z',
     },
   }, {
-    id: 12,
+    movieId: 12,
     nameRU: 'Виллалобос',
     nameEN: 'Villalobos',
     director: 'Ромуальд Кармакар',
@@ -468,7 +468,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:08:31.457Z',
     },
   }, {
-    id: 13,
+    movieId: 13,
     nameRU: 'Между дьяволом и глубоким синим морем',
     nameEN: 'Between the Devil and Wide Blue Sea',
     director: 'Ромуальд Кармакар',
@@ -505,7 +505,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:09:50.052Z',
     },
   }, {
-    id: 14,
+    movieId: 14,
     nameRU: 'Ритмы свободы',
     nameEN: 'Beats of Freedom',
     director: 'Войцек Слота, Лешек Гноиньски',
@@ -545,7 +545,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:13:01.450Z',
     },
   }, {
-    id: 15,
+    movieId: 15,
     nameRU: 'Сепарадо!',
     nameEN: 'Separado!',
     director: 'Дилан Гош, Графф Рис',
@@ -579,7 +579,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:14:13.176Z',
     },
   }, {
-    id: 16,
+    movieId: 16,
     nameRU: ' С ног на голову: История Creation records',
     nameEN: 'Upside Down: The Creation Records Story',
     director: "Дэнни О'Коннор",
@@ -622,7 +622,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:16:16.072Z',
     },
   }, {
-    id: 17,
+    movieId: 17,
     nameRU: 'Я всё ещё здесь',
     nameEN: 'I’m Still Here',
     director: 'Кейси Аффлек',
@@ -659,7 +659,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:18:53.210Z',
     },
   }, {
-    id: 18,
+    movieId: 18,
     nameRU: 'Большие надежды',
     nameEN: 'High on Hope',
     director: ' Пирс Сандерсон',
@@ -693,7 +693,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:20:58.877Z',
     },
   }, {
-    id: 19,
+    movieId: 19,
     nameRU: 'Задний двор',
     nameEN: 'Backyard',
     director: 'Аудни Свейнссон',
@@ -730,7 +730,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:23:25.830Z',
     },
   }, {
-    id: 20,
+    movieId: 20,
     nameRU: 'Еще одно слово на П',
     nameEN: 'The Other F Word',
     director: 'Андреа Блаугрунд',
@@ -764,7 +764,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-02T21:25:42.189Z',
     },
   }, {
-    id: 21,
+    movieId: 21,
     nameRU: 'Х-Х',
     nameEN: 'Х-Х',
     director: 'Наталия Мещанинова',
@@ -807,7 +807,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T09:15:22.496Z',
     },
   }, {
-    id: 22,
+    movieId: 22,
     nameRU: 'Боб Марли: Рэгги навсегда',
     nameEN: 'Marley',
     director: 'Кевин Макдональд',
@@ -850,7 +850,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T09:16:50.671Z',
     },
   }, {
-    id: 23,
+    movieId: 23,
     nameRU: 'Girl Walk: All Day',
     nameEN: 'Girl Walk: All Day',
     director: 'Джейкоб Крапник',
@@ -893,7 +893,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T09:18:41.353Z',
     },
   }, {
-    id: 24,
+    movieId: 24,
     nameRU: 'Боже, храни Оззи Осборна',
     nameEN: 'God Bless Ozzy Osbourne',
     director: 'Майк Флайсс, Майк Пишителли',
@@ -930,7 +930,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T09:20:18.791Z',
     },
   }, {
-    id: 25,
+    movieId: 25,
     nameRU: 'Не оглядывайся',
     nameEN: 'Anton Corbijn Inside Out',
     director: 'Клартье Квирейнс',
@@ -973,7 +973,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T09:24:28.894Z',
     },
   }, {
-    id: 26,
+    movieId: 26,
     nameRU: 'Sigur Ros: Inni',
     nameEN: 'Sigur Ros: Inni',
     director: 'Винсент Моррисет',
@@ -1013,7 +1013,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T09:26:41.564Z',
     },
   }, {
-    id: 27,
+    movieId: 27,
     nameRU: 'Ритмы, рифмы и жизнь: странствия группы A Tribe Called Quest',
     nameEN: 'Beats Rhymes & Life: The Travels of a Tribe Called Quest',
     director: ' Майкл Рапапорт',
@@ -1056,7 +1056,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T09:29:48.552Z',
     },
   }, {
-    id: 28,
+    movieId: 28,
     nameRU: 'Бабушка Lo-Fi ',
     nameEN: 'Amma Lo-Fi',
     director: 'Ингибьёрг Биргисдоуттир, Орри Йоунссон, Кристин Бьёрк Кристьянсдоуттир',
@@ -1099,7 +1099,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T09:31:59.861Z',
     },
   }, {
-    id: 29,
+    movieId: 29,
     nameRU: ' Знакомиться с людьми просто',
     nameEN: 'Meeting People Is Easy',
     director: 'Грант Джи',
@@ -1136,7 +1136,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:05:06.132Z',
     },
   }, {
-    id: 30,
+    movieId: 30,
     nameRU: 'The Libertines: Невинных свидетелей не бывает',
     nameEN: 'The Libertines: There Are No Innocent Bystanders',
     director: ' Роджер Сарджент',
@@ -1170,7 +1170,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:09:02.354Z',
     },
   }, {
-    id: 31,
+    movieId: 31,
     nameRU: 'Тинейдж',
     nameEN: 'Teenage',
     director: 'Мэтт Вулф',
@@ -1207,7 +1207,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:13:20.482Z',
     },
   }, {
-    id: 32,
+    movieId: 32,
     nameRU: ' Дэвид Боуи: Пять лет',
     nameEN: 'David Bowie: Five Years',
     director: 'Френсис Уэйтли',
@@ -1244,7 +1244,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:14:59.540Z',
     },
   }, {
-    id: 33,
+    movieId: 33,
     nameRU: ' Лондон – современный Вавилон',
     nameEN: 'London – The Modern Babylon',
     director: 'Джульен Темпл',
@@ -1284,7 +1284,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:16:01.970Z',
     },
   }, {
-    id: 34,
+    movieId: 34,
     nameRU: 'The Pirate Bay: отойдя от монитора',
     nameEN: 'TPB AFK: The Pirate Bay Away from Keyboard',
     director: 'Саймон Клозе',
@@ -1318,7 +1318,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:18:26.560Z',
     },
   }, {
-    id: 35,
+    movieId: 35,
     nameRU: 'Заткнись и играй хиты',
     nameEN: 'Shut Up and Play the Hits',
     director: 'Уилл Лавлейс, Дилан Сотерн',
@@ -1355,7 +1355,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:22:18.570Z',
     },
   }, {
-    id: 36,
+    movieId: 36,
     nameRU: 'Опасайтесь мистера Бейкера',
     nameEN: 'Beware of Mr. Baker',
     director: 'Джей Балджер',
@@ -1398,7 +1398,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:24:59.280Z',
     },
   }, {
-    id: 38,
+    movieId: 38,
     nameRU: ' Город звука',
     nameEN: 'Sound City',
     director: 'Дэйв Грол',
@@ -1441,7 +1441,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:31:59.071Z',
     },
   }, {
-    id: 39,
+    movieId: 39,
     nameRU: 'Whateverest',
     nameEN: 'Whateverest',
     director: 'Кристоффер Боргли',
@@ -1481,7 +1481,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:53:09.626Z',
     },
   }, {
-    id: 40,
+    movieId: 40,
     nameRU: 'Город Нефти',
     nameEN: 'Oil City Confidential',
     director: 'Джульен Темпл',
@@ -1518,7 +1518,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:55:02.283Z',
     },
   }, {
-    id: 41,
+    movieId: 41,
     nameRU: ' Великое рок-н-ролльное надувательство',
     nameEN: 'The Great Rock-n-Roll Swindle',
     director: 'Джульен Темпл',
@@ -1561,7 +1561,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:56:15.229Z',
     },
   }, {
-    id: 42,
+    movieId: 42,
     nameRU: ' The Rolling Stones: Чарли — моя лапочка',
     nameEN: 'The Rolling Stones: Charlie Is My Darling — Ireland 1965',
     director: 'Питер Уайтхед, Майкл Гочанур ',
@@ -1595,7 +1595,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T10:58:09.398Z',
     },
   }, {
-    id: 43,
+    movieId: 43,
     nameRU: ' Джо Страммер: Будущее неизвестно',
     nameEN: 'Joe Strummer: The Future Is Unwritten',
     director: 'Джульен Темпл',
@@ -1629,7 +1629,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:00:20.373Z',
     },
   }, {
-    id: 44,
+    movieId: 44,
     nameRU: 'Жизнь Кидда',
     nameEN: 'Kidd Life',
     director: 'Андреас Йонсен',
@@ -1666,7 +1666,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:02:46.494Z',
     },
   }, {
-    id: 45,
+    movieId: 45,
     nameRU: ' Мой отец и человек в черном',
     nameEN: 'Machine translate: My father and the man in black',
     director: 'Джонатан Холифф',
@@ -1703,7 +1703,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:04:07.850Z',
     },
   }, {
-    id: 46,
+    movieId: 46,
     nameRU: ' Пити & Джинджер',
     nameEN: 'Petey & Ginger',
     director: 'Ada Bligaard Søby',
@@ -1737,7 +1737,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:11:29.951Z',
     },
   }, {
-    id: 47,
+    movieId: 47,
     nameRU: ' Превращение',
     nameEN: 'Turning',
     director: 'Энтони Хегарти, Чарльз Атлас',
@@ -1774,7 +1774,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:15:17.538Z',
     },
   }, {
-    id: 48,
+    movieId: 48,
     nameRU: 'Efterklang: Призрак Пирамиды',
     nameEN: 'Efterklang: The Ghost of Piramida',
     director: ' Андреас Кефед',
@@ -1811,7 +1811,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:16:24.291Z',
     },
   }, {
-    id: 49,
+    movieId: 49,
     nameRU: 'Тропикалия',
     nameEN: 'Tropicália',
     director: ' Марселу Машаду',
@@ -1845,7 +1845,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:19:39.638Z',
     },
   }, {
-    id: 50,
+    movieId: 50,
     nameRU: 'Чупитулас',
     nameEN: 'Tchoupitoulas',
     director: 'Билл Росс, Тернер Росс',
@@ -1882,7 +1882,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:23:16.740Z',
     },
   }, {
-    id: 51,
+    movieId: 51,
     nameRU: 'Старая добрая Фреда',
     nameEN: 'Good Ol’ Freda',
     director: 'Райан Уайт',
@@ -1916,7 +1916,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:25:06.346Z',
     },
   }, {
-    id: 52,
+    movieId: 52,
     nameRU: ' Олдскульные ренегаты',
     nameEN: 'Oldschool Renegades',
     director: ' Морис Стенберген',
@@ -1953,7 +1953,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:27:49.291Z',
     },
   }, {
-    id: 53,
+    movieId: 53,
     nameRU: 'Pulp: фильм о жизни, смерти и супермаркетах',
     nameEN: 'Pulp: A Film About Life, Death and Supermarkets',
     director: 'Флориан Хабихт',
@@ -1996,7 +1996,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T11:29:39.508Z',
     },
   }, {
-    id: 54,
+    movieId: 54,
     nameRU: ' Супер-пупер Элис Купер',
     nameEN: 'Super Duper Alice Cooper',
     director: 'Сэм Данн, Реджинальд Харкема, Скот МакФадьен',
@@ -2033,7 +2033,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T12:41:17.648Z',
     },
   }, {
-    id: 55,
+    movieId: 55,
     nameRU: 'Еще',
     nameEN: 'Yet',
     director: 'Дмитрий Лавриненко',
@@ -2070,7 +2070,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T12:42:51.755Z',
     },
   }, {
-    id: 56,
+    movieId: 56,
     nameRU: 'The National: Приняты за незнакомцев',
     nameEN: 'Mistaken for Strangers',
     director: ' Том Бернингер',
@@ -2104,7 +2104,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T12:44:31.046Z',
     },
   }, {
-    id: 57,
+    movieId: 57,
     nameRU: 'Панк-певица',
     nameEN: 'The Punk Singer',
     director: 'Сини Андерсон',
@@ -2138,7 +2138,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T12:45:12.181Z',
     },
   }, {
-    id: 58,
+    movieId: 58,
     nameRU: 'Сломанная песня',
     nameEN: 'Broken Song',
     director: 'Клэр Дикс',
@@ -2172,7 +2172,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T12:47:34.192Z',
     },
   }, {
-    id: 59,
+    movieId: 59,
     nameRU: 'Волнуйтесь с нами',
     nameEN: 'Come Worry with Us!',
     director: 'Элен Клодавски',
@@ -2206,7 +2206,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T12:48:41.386Z',
     },
   }, {
-    id: 60,
+    movieId: 60,
     nameRU: '20 000 дней на Земле',
     nameEN: '20 000 Days on Earth',
     director: 'Иэн Форсайт, Джейн Поллард',
@@ -2240,7 +2240,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T12:55:18.189Z',
     },
   }, {
-    id: 61,
+    movieId: 61,
     nameRU: 'Когда Бьорк встретила Аттенборо',
     nameEN: 'When Björk Met Attenborough',
     director: 'Луиз Хупер',
@@ -2274,7 +2274,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T12:56:16.371Z',
     },
   }, {
-    id: 62,
+    movieId: 62,
     nameRU: 'Оборотни по всей Америке',
     nameEN: 'Werewolves Across America',
     director: 'Джеймс Холл, Эдвард Лавлэйс',
@@ -2317,7 +2317,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T13:01:57.448Z',
     },
   }, {
-    id: 63,
+    movieId: 63,
     nameRU: 'Три камня для Жана Жене',
     nameEN: 'Three Stones for Jean Genet',
     director: 'Фридер Шляйх',
@@ -2351,14 +2351,14 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T13:03:29.365Z',
     },
   }, {
-    id: 64,
+    movieId: 64,
     nameRU: 'Повинуйся художнику',
     nameEN: 'Obey the Artist',
     director: 'Онди Тимонер',
     country: 'США',
     year: '2014',
     duration: 14,
-    description: 'Шепард Фэйри до сих пор верит в американскую мечту. Говорит, она сделала его тем, кто он есть, — то есть одним из самых влиятельных стрит-арт-художников современности. И что в некотором смысле это даже хорошо, что у него не было меценатов, которые готовы были платить ему просто за его творчество. Что он до сих пор все рисует собственными руками, но технологии помогают ему делать более масштабные проекты; что по дороге на открытие собственной выставки в Музее современного искусства в Бостоне несколько лет назад он был арестован восемью полицейскими за то, что приклеил стикер на стену. Шепард Фэйри рассказывает свои правила жизни, в то время как режиссер дает нам возможность подсмотреть за его работой и жизнью, главы которой стремительно сменяют друг друга. Вот мы в его студии, а вот в индейской резервации; вот он с баллонами в руках у гигантской стены, а вот в арт-галерее на вечеринке по случаю открытия его выставки «Sid: Superman is Dead», посвященной его кумиру Сиду Вишесу. В микрофон орут Билли Айдол, Клэм Берке из Blondie, Стив Джонс из Sex Pistols и Ли Горман из Wow wow wow, которых он собственноручно собрал по этому случаю, а сам Шепард, одетый как всегда в футболку не то с Марком Боланом, не то с группой Damaged, стоит и улыбается своей широкой, обезоруживающей улыбкой, тем самым доказывая, что он, в отличие от многих, по-прежнему настоящий.\n\n',
+    description: 'Шепард Фэйри до сих пор верит в американскую мечту. Говорит, она сделала его тем, кто он есть, — то есть одним из самых влиятельных стрит-арт-художников современности. И что в некотором смысле это даже хорошо, что у него не было меценатов, которые готовы были платить ему просто за его творчество. Что он до сих пор все рисует собственными руками, но технологии помогают ему делать более масштабные проекты; что по дороге на открытие собственной выставки в Музее современного искусства в Бостоне несколько лет назад он был арестован восемью полицейскими за то, что приклеил стикер на стену. Шепард Фэйри рассказывает свои правила жизни, в то время как режиссер дает нам возможность подсмотреть за его работой и жизнью, главы которой стремительно сменяют друг друга. Вот мы в его студии, а вот в индейской резервации; вот он с баллонами в руках у гигантской стены, а вот в арт-галерее на вечеринке по случаю открытия его выставки «SmovieId: Superman is Dead», посвященной его кумиру Сиду Вишесу. В микрофон орут Билли Айдол, Клэм Берке из Blondie, Стив Джонс из Sex Pistols и Ли Горман из Wow wow wow, которых он собственноручно собрал по этому случаю, а сам Шепард, одетый как всегда в футболку не то с Марком Боланом, не то с группой Damaged, стоит и улыбается своей широкой, обезоруживающей улыбкой, тем самым доказывая, что он, в отличие от многих, по-прежнему настоящий.\n\n',
     trailerLink: 'https://www.youtube.com/watch?v=-FjDrloVnqo',
     created_at: '2020-12-03T13:06:34.263Z',
     updated_at: '2020-12-03T13:06:34.263Z',
@@ -2394,7 +2394,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T13:05:18.545Z',
     },
   }, {
-    id: 65,
+    movieId: 65,
     nameRU: 'Аманда *** Палмер без гроша',
     nameEN: 'Amanda F***ing Palmer on the Rocks',
     director: 'Онди Тимонер',
@@ -2437,7 +2437,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T13:07:22.023Z',
     },
   }, {
-    id: 66,
+    movieId: 66,
     nameRU: 'Алан Вега. Миллион мечтаний',
     nameEN: 'Alan Vega, Just a Million Dreams',
     director: 'Мари Лозье',
@@ -2480,7 +2480,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T13:09:27.637Z',
     },
   }, {
-    id: 67,
+    movieId: 67,
     nameRU: 'На стиле',
     nameEN: 'Fresh Dressed',
     director: 'Саша Дженкинс',
@@ -2514,7 +2514,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T13:12:16.841Z',
     },
   }, {
-    id: 68,
+    movieId: 68,
     nameRU: 'B-Movie: Шум и ярость в Западном Берлине',
     nameEN: 'B-Movie: Lust & Sound In West Berlin 1979-1989',
     director: 'Йорг Хоппе, Хайко Ланге, Клаус Маек',
@@ -2551,7 +2551,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T13:15:01.255Z',
     },
   }, {
-    id: 69,
+    movieId: 69,
     nameRU: 'Sume — Звук революции',
     nameEN: 'Sumé: Mumisitsinerup nipaa',
     director: ' Инук Силис Хег',
@@ -2594,7 +2594,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T16:40:50.001Z',
     },
   }, {
-    id: 70,
+    movieId: 70,
     nameRU: 'Здорово и вечно',
     nameEN: 'Machine translate: Healthy and forever',
     director: 'Анна Цирлина, Наталья Чумакова',
@@ -2637,7 +2637,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T16:42:25.749Z',
     },
   }, {
-    id: 71,
+    movieId: 71,
     nameRU: 'Зеленые дни',
     nameEN: 'Salad Days',
     director: 'Скотт Крофорд',
@@ -2671,7 +2671,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T16:45:14.972Z',
     },
   }, {
-    id: 72,
+    movieId: 72,
     nameRU: 'Из Остина в Бостон',
     nameEN: 'Austin to Boston',
     director: 'Джеймс Маркус',
@@ -2705,7 +2705,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T16:47:03.305Z',
     },
   }, {
-    id: 73,
+    movieId: 73,
     nameRU: 'Только сейчас',
     nameEN: 'All We Have Is Now',
     director: 'Александра Дальстрём',
@@ -2742,7 +2742,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T16:50:24.314Z',
     },
   }, {
-    id: 74,
+    movieId: 74,
     nameRU: 'Город Остров',
     nameEN: 'A City Is an Island',
     director: 'Тимоти Джордж Келли',
@@ -2785,7 +2785,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T16:52:38.095Z',
     },
   }, {
-    id: 75,
+    movieId: 75,
     nameRU: 'Орион',
     nameEN: 'Orion: The Man Who Would Be King',
     director: 'Джини Финлэй',
@@ -2828,7 +2828,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T16:56:07.988Z',
     },
   }, {
-    id: 76,
+    movieId: 76,
     nameRU: ' Возможности безграничны',
     nameEN: 'The Possibilities Are Endless',
     director: 'Джеймс Холл, Эдвард Лавлэйс',
@@ -2871,7 +2871,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T16:57:41.958Z',
     },
   }, {
-    id: 77,
+    movieId: 77,
     nameRU: 'Ламберт и Стэмп',
     nameEN: 'Lambert & Stamp',
     director: 'Джеймс Д. Купер',
@@ -2905,7 +2905,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T17:01:26.006Z',
     },
   }, {
-    id: 78,
+    movieId: 78,
     nameRU: 'Ли Скретч Перри: Виденье рая',
     nameEN: 'Lee Scratch Perry’s Vision of Paradise',
     director: 'Фолькер Шанер',
@@ -2942,7 +2942,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T17:04:50.419Z',
     },
   }, {
-    id: 79,
+    movieId: 79,
     nameRU: 'Любимый небесами',
     nameEN: 'Heaven Adores You',
     director: 'Николас Дилан Росси',
@@ -2976,7 +2976,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T17:09:56.363Z',
     },
   }, {
-    id: 80,
+    movieId: 80,
     nameRU: 'От станции к станции',
     nameEN: 'Station to Station',
     director: 'Даг Эйткен',
@@ -3019,7 +3019,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T17:12:02.905Z',
     },
   }, {
-    id: 81,
+    movieId: 81,
     nameRU: 'Берроуз',
     nameEN: 'Burroughs: The Movie',
     director: 'Ховард Брукнер',
@@ -3056,7 +3056,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T17:58:43.203Z',
     },
   }, {
-    id: 82,
+    movieId: 82,
     nameRU: 'Бэнкси уделывает Нью-Йорк',
     nameEN: 'Banksy Does New York',
     director: ' Крис Мукарбел',
@@ -3096,7 +3096,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:04:02.124Z',
     },
   }, {
-    id: 83,
+    movieId: 83,
     nameRU: 'Айрис',
     nameEN: 'Iris',
     director: 'Unknown',
@@ -3130,7 +3130,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:06:15.128Z',
     },
   }, {
-    id: 84,
+    movieId: 84,
     nameRU: 'Boiler Room – Stay in Russia',
     nameEN: 'Boiler Room – Stay in Russia',
     director: 'Александра Худоконя, Лейлы Машариповой',
@@ -3173,7 +3173,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:08:24.148Z',
     },
   }, {
-    id: 85,
+    movieId: 85,
     nameRU: 'Слушая Москву',
     nameEN: 'Machine translate: Listening to Moscow',
     director: 'Иван Проскуряков',
@@ -3210,7 +3210,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:12:04.386Z',
     },
   }, {
-    id: 86,
+    movieId: 86,
     nameRU: 'Ямаха',
     nameEN: 'Yamaha',
     director: 'Инна Омельченко',
@@ -3253,7 +3253,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:17:56.769Z',
     },
   }, {
-    id: 87,
+    movieId: 87,
     nameRU: 'Костры и звезды',
     nameEN: 'Bonfires and Stars',
     director: 'Саша Воронов',
@@ -3293,7 +3293,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:19:48.711Z',
     },
   }, {
-    id: 88,
+    movieId: 88,
     nameRU: 'Ладно хорошо',
     nameEN: 'Ok Good',
     director: 'Александра Кулак, Анна Корниенко, Юлия Курмангалина',
@@ -3327,7 +3327,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:22:44.416Z',
     },
   }, {
-    id: 89,
+    movieId: 89,
     nameRU: 'Бледные строения',
     nameEN: 'Pale Buildings',
     director: 'Филипп Задорожный',
@@ -3370,7 +3370,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:24:57.245Z',
     },
   }, {
-    id: 90,
+    movieId: 90,
     nameRU: 'Златан. Начало',
     nameEN: 'Den Unge Zlatan',
     director: 'Фредрик Герттен, Магнус Герттен',
@@ -3413,7 +3413,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:27:21.915Z',
     },
   }, {
-    id: 91,
+    movieId: 91,
     nameRU: 'Бег — это свобода',
     nameEN: 'Free to Run',
     director: 'Пьер Морат',
@@ -3447,7 +3447,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:28:51.256Z',
     },
   }, {
-    id: 92,
+    movieId: 92,
     nameRU: 'Горькое озеро',
     nameEN: 'Bitter Lake',
     director: 'Адам Кертис ',
@@ -3481,7 +3481,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:36:37.808Z',
     },
   }, {
-    id: 93,
+    movieId: 93,
     nameRU: 'Фонко',
     nameEN: 'Fonko',
     director: 'Ламин Даниель Ядама, Ларс Ловен, Йеран Ульссон',
@@ -3524,7 +3524,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:38:19.277Z',
     },
   }, {
-    id: 94,
+    movieId: 94,
     nameRU: ' Мы – X',
     nameEN: 'We Are X',
     director: 'Стивен Кайак',
@@ -3558,7 +3558,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:50:08.354Z',
     },
   }, {
-    id: 95,
+    movieId: 95,
     nameRU: 'В ожидании Б',
     nameEN: 'Waiting for B.',
     director: 'Пауло Сезар Толедо, Эбигейл Спиндел',
@@ -3592,7 +3592,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:54:38.744Z',
     },
   }, {
-    id: 96,
+    movieId: 96,
     nameRU: 'ЛеФ',
     nameEN: 'LeF',
     director: 'Дмитрий Лавриненко',
@@ -3626,7 +3626,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:57:20.383Z',
     },
   }, {
-    id: 97,
+    movieId: 97,
     nameRU: 'Олег и редкие искусства',
     nameEN: 'Oleg y las raras artes',
     director: 'Андрес Дуке',
@@ -3660,7 +3660,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T18:57:54.033Z',
     },
   }, {
-    id: 98,
+    movieId: 98,
     nameRU: 'Джунун',
     nameEN: 'Junun',
     director: 'Пол Томас Андерсон',
@@ -3694,7 +3694,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T19:01:21.862Z',
     },
   }, {
-    id: 99,
+    movieId: 99,
     nameRU: 'Дженис: Маленькая девочка грустит',
     nameEN: 'Janis: Little Girl Blue',
     director: 'Эми Берг',
@@ -3728,7 +3728,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T19:02:47.581Z',
     },
   }, {
-    id: 100,
+    movieId: 100,
     nameRU: 'Зигги Звёздная Пыль и пауки с Марса',
     nameEN: ' Ziggy Stardust and the Spiders from Mars',
     director: ' Д.А. Пеннебейкер',
@@ -3765,7 +3765,7 @@ export const fixtureFilms = [
       updated_at: '2020-12-03T19:06:27.399Z',
     },
   }, {
-    id: 101,
+    movieId: 101,
     nameRU: 'SOS матросу!',
     nameEN: 'Vladivostok Vacation and the Great Russian Break',
     director: 'Дэнни Дрисдейл',

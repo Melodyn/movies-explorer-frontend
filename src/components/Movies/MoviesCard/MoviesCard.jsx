@@ -1,9 +1,11 @@
 import './MoviesCard.css';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
-export const MoviesCard = ({ card = {} }) => {
+export const MoviesCard = ({ card = {}, onClickSave }) => {
   const location = useLocation();
+  const [disabled, setDisabled] = useState(false);
   const isLocationSaved = location.pathname.includes('saved');
   const classNames = cn(
     'animation',
@@ -18,6 +20,12 @@ export const MoviesCard = ({ card = {} }) => {
   const durationH = card.duration >= 60 ? `${Math.floor(card.duration / 60)} ч ` : '';
   const durationM = card.duration === 60 ? '' : `${card.duration % 60} м`;
   const duration = `${durationH}${durationM}`.trim();
+  const onSave = () => {
+    setDisabled(true);
+    onClickSave(card, () => {
+      setDisabled(false);
+    });
+  };
 
   return (
     <li className="cards__item">
@@ -30,6 +38,8 @@ export const MoviesCard = ({ card = {} }) => {
           <button
             type="button"
             className={classNames}
+            disabled={disabled}
+            onClick={onSave}
             aria-label="Избранное"
           />
         </div>

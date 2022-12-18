@@ -1,22 +1,25 @@
 export class FakeApiMain {
   constructor(config) {
     this._config = config;
-  }
-
-  /* profile */
-  async getProfile() {
-    return {
+    this._profile = {
       _id: '638adc58eea2716444c0f7cb',
       name: 'test@test.com',
       email: 'test@test.com',
     };
+    this._wasLoaded = false;
+    this._cards = [];
   }
 
-  setAvatar() {
-    return this.getProfile();
+  /* profile */
+  async getProfile() {
+    return this._profile;
   }
 
-  setInfo() {
+  setInfo({ name, email }) {
+    this._profile = {
+      ...this._profile,
+      ...({ name, email }),
+    };
     return this.getProfile();
   }
 
@@ -35,5 +38,31 @@ export class FakeApiMain {
 
   register() {
     return this.getProfile();
+  }
+
+  /* cards */
+  async load() {
+    if (!this._wasLoaded) {
+      const savedCards = localStorage.getItem('savedCards') || '[]';
+      this._cards = JSON.parse(savedCards);
+      this._wasLoaded = true;
+    }
+    return this._cards;
+  }
+
+  async saveOrRemove(card) {
+    return new Promise((res) => {
+      setTimeout(() => {
+        const { saved = false, ...fields } = card;
+        const updatedCard = saved ? fields : ({ ...fields, saved: true });
+        if (saved) {
+          this._cards = this._cards.filter((crd) => (crd.movieId !== fields.movieId));
+        } else {
+          this._cards = this._cards.concat(updatedCard);
+        }
+        localStorage.setItem('savedCards', JSON.stringify(this._cards));
+        res(updatedCard);
+      }, 500);
+    });
   }
 }
