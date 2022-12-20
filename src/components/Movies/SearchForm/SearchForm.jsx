@@ -4,7 +4,12 @@ import './SearchForm.css';
 import { useEffect, useRef } from 'react';
 import { useForm } from '../../../hooks/useForm';
 
-export const SearchForm = ({ onSearch, searchParams, required }) => {
+export const SearchForm = ({
+  onTypingSearch,
+  onSearch,
+  searchParams,
+  required,
+}) => {
   const { isLoading, ...params } = searchParams;
   const formRef = useRef(null);
   const {
@@ -17,10 +22,10 @@ export const SearchForm = ({ onSearch, searchParams, required }) => {
   } = useForm(formRef, params);
 
   const onChange = (e) => {
-    localStorage.setItem(`search_${e.target.name}`, e.target.type === 'checkbox'
-      ? e.target.checked
-      : e.target.value);
     setValues(e);
+    onTypingSearch(e.target.name, (e.target.type === 'checkbox'
+      ? e.target.checked
+      : e.target.value));
   };
 
   const onSubmit = setSubmitHandler(onSearch);

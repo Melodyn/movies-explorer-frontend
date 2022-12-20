@@ -114,11 +114,11 @@ export class FakeApiMain {
     const { saved = false, ...fields } = card;
     const updatedCard = saved ? fields : ({ ...fields, saved: true });
     if (saved) {
-      this._cards = this._cards.filter((crd) => (crd.movieId !== fields.movieId));
+      this._searchResults = this._searchResults.filter((crd) => (crd.movieId !== fields.movieId));
     } else {
-      this._cards = this._cards.concat(updatedCard);
+      this._searchResults = this._searchResults.concat(updatedCard);
     }
-    localStorage.setItem('savedCards', JSON.stringify(this._cards));
+    localStorage.setItem('savedCards', JSON.stringify(this._searchResults));
     return updatedCard;
   }
 }

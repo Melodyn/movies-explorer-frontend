@@ -29,7 +29,8 @@ export const Movies = ({ apiFilms, apiMain }) => {
   const savedFilmSearch = (localStorage.getItem(lsKeyNameFilm) || '');
   const savedShortsSearch = (localStorage.getItem(lsKeyNameShorts) || false);
   const hasSavedSearch = savedFilmSearch.length > 0;
-  // TODO: при переходе между страницами не стирается поисковый запрос
+  // TODO: по кнопке "ещё" в списке всех очищается список сохранёнок, в списке сохранёнок нет "ещё"
+
   const defaultSearchParams = {
     film: savedFilmSearch,
     shorts: (savedShortsSearch === 'true'),
@@ -38,6 +39,11 @@ export const Movies = ({ apiFilms, apiMain }) => {
   const [cards, setCards] = useState([]);
   const [searchWasInit, setSearchWasInit] = useState(hasSavedSearch);
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
+
+  useEffect(() => {
+    setSearchParams(defaultSearchParams);
+  }, [isPageSaved]);
+
   const [apiHasError, setApiHasError] = useState(false);
   const isEmpty = (cards.length === 0);
 
@@ -55,6 +61,10 @@ export const Movies = ({ apiFilms, apiMain }) => {
 
   const onEndSearch = () => {
     setSearchParams((params) => ({ ...params, isLoading: false }));
+  };
+
+  const onTypingSearch = (fieldName, value) => {
+    localStorage.setItem(`search_${fieldName}${isPageSaved ? '_saved' : ''}`, value);
   };
 
   const updateBeatFilmsChunk = (reset = false) => {
@@ -141,6 +151,18 @@ export const Movies = ({ apiFilms, apiMain }) => {
       .finally(onEnd);
   };
 
+  const onClickRemove = (film, onEnd) => {
+    apiMain.saveOrRemove(film)
+      .then((updatedFilm) => {
+        setCards((crds) => crds.filter((flm) => (flm.movieId !== updatedFilm.movieId)));
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiHasError(true);
+      })
+      .finally(onEnd);
+  };
+
   useEffect(() => {
     const searchAccepted = isPageSaved || searchWasInit;
     if (searchAccepted && !searchParams.isLoading) {
@@ -154,14 +176,19 @@ export const Movies = ({ apiFilms, apiMain }) => {
 
   return (
     <main className="main">
-      <SearchForm onSearch={onSearch} searchParams={searchParams} required={!isPageSaved} />
+      <SearchForm
+        onTypingSearch={onTypingSearch}
+        onSearch={onSearch}
+        searchParams={searchParams}
+        required={!isPageSaved}
+      />
       {searchParams.isLoading && (
         <PreloaderContainer />
       )}
       <MoviesCardList
         cards={cards}
         loadMore={loadMore}
-        onClickSave={onClickSave}
+        onClickSave={isPageSaved ? onClickRemove : onClickSave}
         hasMore={apiFilms.hasMore()}
         isEmpty={isEmpty}
         isLoading={searchParams.isLoading}
