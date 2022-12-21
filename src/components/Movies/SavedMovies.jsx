@@ -5,19 +5,18 @@ import { MoviesCardList } from './MoviesCardList/MoviesCardList';
 import { PreloaderContainer } from './PreloaderContainer/PreloaderContainer';
 import { calcCardsCounter } from '../../utils/constants';
 
-export const Movies = ({ apiFilms, apiMain }) => {
-  const lsKeyNameFilm = 'search_film';
-  const lsKeyNameShorts = 'search_shorts';
+export const SavedMovies = ({ apiMain }) => {
+  const lsKeyNameFilm = 'search_film_saved';
+  const lsKeyNameShorts = 'search_shorts_saved';
   const savedFilmSearch = (localStorage.getItem(lsKeyNameFilm) || '');
   const savedShortsSearch = (localStorage.getItem(lsKeyNameShorts) || false);
-  const hasSavedSearch = (savedFilmSearch.length > 0);
   const defaultSearchParams = {
     film: savedFilmSearch,
     shorts: (savedShortsSearch === 'true'),
     isLoading: false,
   };
   const [cards, setCards] = useState([]);
-  const [searchWasInit, setSearchWasInit] = useState(hasSavedSearch);
+  const [searchWasInit, setSearchWasInit] = useState(true);
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [apiHasError, setApiHasError] = useState(false);
   const isEmpty = (cards.length === 0);
@@ -39,28 +38,22 @@ export const Movies = ({ apiFilms, apiMain }) => {
   };
 
   const onTypingSearch = (fieldName, value) => {
-    localStorage.setItem(`search_${fieldName}`, value);
+    localStorage.setItem(`search_${fieldName}_saved`, value);
   };
 
   const updateFilmsChunk = (reset = false) => {
     const cardsCounter = calcCardsCounter();
     let size = cardsCounter.more;
     if (reset) {
-      apiFilms.resetCursor();
+      apiMain.resetCursor();
       size = cardsCounter.init;
     }
 
-    apiFilms.get({
+    apiMain.get({
       ...searchParams,
       size,
     })
-      .then((newCards) => Promise
-        .all(newCards.map(({ movieId }) => apiMain.get({ ...searchParams, id: movieId, size: Infinity })))
-        .then((savedCards) => [newCards, savedCards.flat()]))
-      .then(([newCards, savedCards]) => {
-        const savedCardsSet = new Set(savedCards.map((card) => card.movieId));
-        const updatedCards = newCards.map((card) => ({ ...card, saved: savedCardsSet.has(card.movieId) }));
-
+      .then((updatedCards) => {
         if (reset) {
           setCards(() => updatedCards);
         } else {
@@ -82,10 +75,10 @@ export const Movies = ({ apiFilms, apiMain }) => {
     updateFilmsChunk();
   };
 
-  const onClickSave = (film, onEnd) => {
+  const onClickRemove = (film, onEnd) => {
     apiMain.saveOrRemove(film)
       .then((updatedFilm) => {
-        setCards((crds) => crds.map((flm) => (flm.movieId === updatedFilm.movieId ? updatedFilm : flm)));
+        setCards((crds) => crds.filter((flm) => (flm.movieId !== updatedFilm.movieId)));
       })
       .catch((err) => {
         console.error(err);
@@ -95,11 +88,12 @@ export const Movies = ({ apiFilms, apiMain }) => {
   };
 
   useEffect(() => {
-    if (searchWasInit && !searchParams.isLoading) {
+    const searchAccepted = searchWasInit;
+    if (searchAccepted && !searchParams.isLoading) {
       setSearchParams((params) => ({ ...params, isLoading: true }));
     }
 
-    if (searchWasInit) {
+    if (searchAccepted) {
       updateFilmsChunk('reset');
     }
   }, [searchWasInit, searchParams.film, searchParams.shorts]);
@@ -110,7 +104,6 @@ export const Movies = ({ apiFilms, apiMain }) => {
         onTypingSearch={onTypingSearch}
         onSearch={onSearch}
         searchParams={searchParams}
-        required
       />
       {searchParams.isLoading && (
         <PreloaderContainer />
@@ -118,8 +111,8 @@ export const Movies = ({ apiFilms, apiMain }) => {
       <MoviesCardList
         cards={cards}
         loadMore={loadMore}
-        onClickSave={onClickSave}
-        hasMore={apiFilms.hasMore()}
+        onClickSave={onClickRemove}
+        hasMore={apiMain.hasMore()}
         isEmpty={isEmpty}
         isLoading={searchParams.isLoading}
         searchAccepted={searchWasInit}

@@ -83,10 +83,6 @@ export class ApiMain {
     this._config.apiMainAuthToken = token;
   }
 
-  checkToken() {
-    return this.getProfile();
-  }
-
   login({ password, email }) {
     return this._fetch('signin', HTTP_METHOD.POST, { password, email });
   }
