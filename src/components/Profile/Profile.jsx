@@ -53,6 +53,7 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
         <div className="profile-form__fields-wrapper">
           <h1 className="profile-form__header">
             Здарова,
+            {' '}
             {currentUser.name}
           </h1>
 

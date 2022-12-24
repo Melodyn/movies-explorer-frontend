@@ -15,7 +15,10 @@ export class FakeApiFilms {
   async load() {
     if (!this._wasLoaded) {
       this._films = fixtureFilms.map((film) => {
-        film.cover = this.buildCoverLink(film);
+        const covers = [pepe, save];
+        const randIdx = Math.round(Math.random());
+        film.thumbnail = covers[randIdx];
+        film.image = `${this._config.filmsBaseURL}${film.image.url}`;
         return film;
       });
       this._wasLoaded = true;
@@ -33,12 +36,6 @@ export class FakeApiFilms {
 
   hasMore() {
     return (this._cursor < this._searchResults.length);
-  }
-
-  buildCoverLink() {
-    const covers = [pepe, save];
-    const randIdx = Math.round(Math.random());
-    return covers[randIdx];
   }
 
   async get({

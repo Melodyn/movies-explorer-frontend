@@ -1,11 +1,15 @@
 import './Movies.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { SearchForm } from './SearchForm/SearchForm';
 import { MoviesCardList } from './MoviesCardList/MoviesCardList';
 import { PreloaderContainer } from './PreloaderContainer/PreloaderContainer';
 import { calcCardsCounter } from '../../utils/constants';
+import { UserContext } from '../../contexts/User';
 
 export const SavedMovies = ({ apiMain }) => {
+  const currentUser = useContext(UserContext);
+  apiMain.setToken(currentUser.token);
+
   const lsKeyNameFilm = 'search_film_saved';
   const lsKeyNameShorts = 'search_shorts_saved';
   const savedFilmSearch = (localStorage.getItem(lsKeyNameFilm) || '');
@@ -16,7 +20,6 @@ export const SavedMovies = ({ apiMain }) => {
     isLoading: false,
   };
   const [cards, setCards] = useState([]);
-  const [searchWasInit, setSearchWasInit] = useState(true);
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [apiHasError, setApiHasError] = useState(false);
   const isEmpty = (cards.length === 0);
@@ -29,7 +32,6 @@ export const SavedMovies = ({ apiMain }) => {
     };
     localStorage.setItem(lsKeyNameFilm, updatedParams.film);
     localStorage.setItem(lsKeyNameShorts, updatedParams.shorts);
-    if (!searchWasInit) setSearchWasInit(true);
     setSearchParams(() => updatedParams);
   };
 
@@ -54,6 +56,11 @@ export const SavedMovies = ({ apiMain }) => {
       size,
     })
       .then((updatedCards) => {
+        updatedCards.forEach((card) => {
+          card.saved = true;
+          card.id = card._id;
+        });
+
         if (reset) {
           setCards(() => updatedCards);
         } else {
@@ -88,15 +95,12 @@ export const SavedMovies = ({ apiMain }) => {
   };
 
   useEffect(() => {
-    const searchAccepted = searchWasInit;
-    if (searchAccepted && !searchParams.isLoading) {
+    if (!searchParams.isLoading) {
       setSearchParams((params) => ({ ...params, isLoading: true }));
     }
 
-    if (searchAccepted) {
-      updateFilmsChunk('reset');
-    }
-  }, [searchWasInit, searchParams.film, searchParams.shorts]);
+    updateFilmsChunk('reset');
+  }, [searchParams.film, searchParams.shorts]);
 
   return (
     <main className="main">
@@ -115,8 +119,8 @@ export const SavedMovies = ({ apiMain }) => {
         hasMore={apiMain.hasMore()}
         isEmpty={isEmpty}
         isLoading={searchParams.isLoading}
-        searchAccepted={searchWasInit}
         apiHasError={apiHasError}
+        searchAccepted
       />
     </main>
   );

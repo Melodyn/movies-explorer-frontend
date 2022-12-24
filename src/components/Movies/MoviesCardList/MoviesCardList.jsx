@@ -16,7 +16,7 @@ export const MoviesCardList = ({
       {searchAccepted && !apiHasError && !isEmpty && (
         <>
           <ul className="cards">
-            {cards.map((card) => <MoviesCard key={card.movieId} card={card} onClickSave={onClickSave} />)}
+            {cards.map((card) => <MoviesCard key={card.id} card={card} onClickSave={onClickSave} />)}
           </ul>
           {!apiHasError && hasMore && (
             <button

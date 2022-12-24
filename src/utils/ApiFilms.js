@@ -18,6 +18,8 @@ export class ApiFilms {
     this._config = config;
     this._config.filmsBaseURL = (new URL(this._config.apiFilmsBaseURL)).origin;
     this._films = [];
+    this._wasLoaded = false;
+    this._searchResults = [];
     this._chunkSize = 3;
     this._cursor = 0;
 
@@ -35,12 +37,17 @@ export class ApiFilms {
   }
 
   async load() {
-    return this._fetch('').then((films) => {
-      this._films = films.map((film) => {
-        film.cover = this.buildCoverLink(film);
-        return film;
+    if (!this._wasLoaded) {
+      await this._fetch('').then((films) => {
+        this._films = films.map((film) => {
+          film.thumbnail = `${this._config.filmsBaseURL}${film.image.url}`;
+          film.image = `${this._config.filmsBaseURL}${film.image.url}`;
+          film.movieId = film.id;
+          return film;
+        });
       });
-    });
+      this._wasLoaded = true;
+    }
   }
 
   setChunkSize(size) {
@@ -49,36 +56,44 @@ export class ApiFilms {
 
   resetCursor() {
     this._cursor = 0;
+    this._searchResults = [];
   }
 
   hasMore() {
-    return (this._cursor < this._films.length);
-  }
-
-  buildCoverLink(card) {
-    return `${this._config.filmsBaseURL}${card.image.url}`;
+    return (this._cursor < this._searchResults.length);
   }
 
   async get({
     size = 0,
-    film,
-    shorts,
+    film = '',
+    shorts = false,
   }) {
+    await this.load();
+
     const chunkSize = size === 0 ? this._chunkSize : size;
     const startIdx = this._cursor;
     const endIdx = startIdx + chunkSize;
 
     this._searchResults = this._films
-      .filter((filmm) => {
-        const { nameRU, duration } = filmm;
+      .filter((item) => {
+        const {
+          nameRU = '',
+          nameEN = '',
+          duration,
+        } = item;
+
         if (shorts && duration > 40) {
           return false;
         }
-        return nameRU
+
+        return `${nameRU}${nameEN}`
           .toLowerCase()
           .includes(film.toLowerCase());
       });
-    const films = this._searchResults.slice(startIdx, endIdx);
+
+    const films = (this._searchResults.length > 1)
+      ? this._searchResults.slice(startIdx, endIdx)
+      : this._searchResults;
 
     if (startIdx < this._searchResults.length) {
       this._cursor += chunkSize;

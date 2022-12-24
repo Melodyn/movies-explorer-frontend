@@ -44,7 +44,7 @@ export const MoviesCard = ({ card = {}, onClickSave }) => {
           />
         </div>
         <a href={card.trailerLink} target="_blank" className="card__link" rel="noreferrer">
-          <img className="card__image" src={card.cover} alt={card.name} />
+          <img className="card__image" src={card.thumbnail} alt={card.name} />
         </a>
       </section>
     </li>

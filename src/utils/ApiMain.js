@@ -16,6 +16,11 @@ const processResponse = (res) => {
 export class ApiMain {
   constructor(config) {
     this._config = config;
+    this._cards = [];
+    this._searchResults = [];
+    this._wasLoaded = false;
+    this._chunkSize = 3;
+    this._cursor = 0;
 
     this._fetch = (page, method = HTTP_METHOD.GET, body = undefined) => {
       const authorizationHeader = this._config.apiMainAuthToken
@@ -42,40 +47,8 @@ export class ApiMain {
     return this._fetch('users/me');
   }
 
-  setAvatar({ avatar }) {
-    return this._fetch('users/me/avatar', HTTP_METHOD.PATCH, { avatar });
-  }
-
   setInfo({ name, email }) {
     return this._fetch('users/me', HTTP_METHOD.PATCH, { name, email });
-  }
-
-  /* card */
-  getCards() {
-    return this._fetch('cards');
-  }
-
-  createCard({ name, link }) {
-    return this._fetch('cards', HTTP_METHOD.POST, { name, link });
-  }
-
-  removeCard({ cardId }) {
-    return this._fetch(`cards/${cardId}`, HTTP_METHOD.DELETE);
-  }
-
-  likeCard({ cardId, liked }) {
-    if (liked) {
-      return this.removeLikeCard({ cardId });
-    }
-    return this.addLikeCard({ cardId });
-  }
-
-  addLikeCard({ cardId }) {
-    return this._fetch(`cards/${cardId}/likes`, HTTP_METHOD.PUT);
-  }
-
-  removeLikeCard({ cardId }) {
-    return this._fetch(`cards/${cardId}/likes`, HTTP_METHOD.DELETE);
   }
 
   /* auth */
@@ -89,5 +62,94 @@ export class ApiMain {
 
   register({ password, email, name }) {
     return this._fetch('signup', HTTP_METHOD.POST, { password, email, name });
+  }
+
+  /* cards */
+  setChunkSize(size) {
+    this._chunkSize = size;
+  }
+
+  resetCursor() {
+    this._cursor = 0;
+    this._searchResults = [];
+  }
+
+  hasMore() {
+    return (this._cursor < this._searchResults.length);
+  }
+
+  async load() {
+    if (!this._wasLoaded) {
+      await this._fetch('movies').then((cards) => {
+        this._cards = cards;
+        this._wasLoaded = true;
+      });
+    }
+  }
+
+  async get({
+    size = 0,
+    film = '',
+    shorts = false,
+    id = null,
+  }) {
+    await this.load();
+
+    const chunkSize = (size === 0) ? this._chunkSize : size;
+    const startIdx = this._cursor;
+    const endIdx = startIdx + chunkSize;
+
+    this._searchResults = this._cards
+      .filter((item) => {
+        const {
+          nameRU = '',
+          nameEN = '',
+          duration,
+          movieId,
+        } = item;
+
+        if (shorts && duration > 40) {
+          return false;
+        }
+
+        if (id && id === movieId) {
+          return true;
+        }
+
+        return `${nameRU}${nameEN}`
+          .toLowerCase()
+          .includes(film.toLowerCase());
+      });
+
+    const cards = (this._searchResults.length > 1)
+      ? this._searchResults.slice(startIdx, endIdx)
+      : this._searchResults;
+
+    if (startIdx < this._searchResults.length) {
+      this._cursor += chunkSize;
+    }
+
+    return cards;
+  }
+
+  async saveOrRemove(card) {
+    await this.load();
+
+    const { saved = false, _id = '', ...fields } = card;
+
+    if (saved) {
+      return this._fetch(`movies/${_id}`, HTTP_METHOD.DELETE)
+        .then((deletedCard) => {
+          this._cards = this._cards.filter((crd) => (crd.movieId !== deletedCard.movieId));
+          return deletedCard;
+        });
+    }
+
+    return this._fetch('movies', HTTP_METHOD.POST, fields)
+      .then((newCard) => {
+        newCard.saved = true;
+        this._cards = this._cards.concat(newCard);
+        return newCard;
+      });
   }
 }

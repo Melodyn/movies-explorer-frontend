@@ -1,11 +1,15 @@
 import './Movies.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { SearchForm } from './SearchForm/SearchForm';
 import { MoviesCardList } from './MoviesCardList/MoviesCardList';
 import { PreloaderContainer } from './PreloaderContainer/PreloaderContainer';
 import { calcCardsCounter } from '../../utils/constants';
+import { UserContext } from '../../contexts/User';
 
 export const Movies = ({ apiFilms, apiMain }) => {
+  const currentUser = useContext(UserContext);
+  apiMain.setToken(currentUser.token);
+
   const lsKeyNameFilm = 'search_film';
   const lsKeyNameShorts = 'search_shorts';
   const savedFilmSearch = (localStorage.getItem(lsKeyNameFilm) || '');
@@ -50,13 +54,23 @@ export const Movies = ({ apiFilms, apiMain }) => {
       size = cardsCounter.init;
     }
 
-    apiFilms.get({
-      ...searchParams,
-      size,
-    })
-      .then((newCards) => Promise
+    Promise.all([
+      apiFilms.get({
+        ...searchParams,
+        size,
+      }),
+      apiMain.load(),
+    ])
+      .then(([newCards]) => Promise
         .all(newCards.map(({ movieId }) => apiMain.get({ ...searchParams, id: movieId, size: Infinity })))
-        .then((savedCards) => [newCards, savedCards.flat()]))
+        .then((savedCards) => [
+          newCards,
+          savedCards.flatMap((card) => {
+            card.saved = true;
+            card.id = card._id;
+            return card;
+          }),
+        ]))
       .then(([newCards, savedCards]) => {
         const savedCardsSet = new Set(savedCards.map((card) => card.movieId));
         const updatedCards = newCards.map((card) => ({ ...card, saved: savedCardsSet.has(card.movieId) }));

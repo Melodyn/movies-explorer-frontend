@@ -11,10 +11,10 @@ import {
 import { UserContext, defaultUser } from '../../contexts/User';
 import { useStorageToken } from '../../hooks/useStorageToken';
 import { ROUTE } from '../../utils/constants';
-// import { ApiMain } from '../../utils/ApiMain';
-// import { ApiFilms } from '../../utils/ApiFilms';
-import { FakeApiMain } from '../../utils/FakeApiMain';
-import { FakeApiFilms } from '../../utils/FakeApiFilms';
+import { ApiMain } from '../../utils/ApiMain';
+import { ApiFilms } from '../../utils/ApiFilms';
+// import { FakeApiMain } from '../../utils/FakeApiMain';
+// import { FakeApiFilms } from '../../utils/FakeApiFilms';
 // components
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { Header } from '../Header/Header';
@@ -30,10 +30,10 @@ import { Login } from '../Login/Login';
 import { Profile } from '../Profile/Profile';
 
 export const App = ({ config }) => {
-  // const apiMain = new ApiMain(config);
-  // const apiFilms = new ApiFilms(config);
-  const apiMain = new FakeApiMain(config);
-  const apiFilms = new FakeApiFilms(config);
+  const apiMain = new ApiMain(config);
+  const apiFilms = new ApiFilms(config);
+  // const apiMain = new FakeApiMain(config);
+  // const apiFilms = new FakeApiFilms(config);
 
   const [isNavtabOpened, setIsNavtabOpened] = useState(false);
   const [token, saveToken] = useStorageToken();

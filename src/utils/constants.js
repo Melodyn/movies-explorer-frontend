@@ -7,7 +7,7 @@ export const configByEnv = {
   },
   development: {
     env: 'development',
-    apiMainBaseURL: 'http://localhost:5000',
+    apiMainBaseURL: 'http://localhost:3000',
     apiFilmsBaseURL: 'https://api.nomoreparties.co/beatfilm-movies',
     apiMainAuthToken: '',
   },
