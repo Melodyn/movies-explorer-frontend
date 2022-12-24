@@ -13,6 +13,7 @@ import { useStorageToken } from '../../hooks/useStorageToken';
 import { ROUTE } from '../../utils/constants';
 import { ApiMain } from '../../utils/ApiMain';
 import { ApiFilms } from '../../utils/ApiFilms';
+// Для локальной разработки без интернета
 // import { FakeApiMain } from '../../utils/FakeApiMain';
 // import { FakeApiFilms } from '../../utils/FakeApiFilms';
 // components
@@ -32,6 +33,7 @@ import { Profile } from '../Profile/Profile';
 export const App = ({ config }) => {
   const apiMain = new ApiMain(config);
   const apiFilms = new ApiFilms(config);
+  // Для локальной разработки без интернета
   // const apiMain = new FakeApiMain(config);
   // const apiFilms = new FakeApiFilms(config);
 
@@ -63,12 +65,12 @@ export const App = ({ config }) => {
 
   const onLogin = (user) => {
     updateUser({ token: user.token });
-    navigate(ROUTE.MAIN);
+    navigate(ROUTE.MOVIES);
   };
 
   const onRegister = (user) => {
     updateUser(user);
-    navigate(ROUTE.SIGNIN);
+    navigate(ROUTE.MOVIES);
   };
 
   const onEditProfile = (user) => {
@@ -77,6 +79,7 @@ export const App = ({ config }) => {
 
   const onLogout = () => {
     updateUser(defaultUser);
+    localStorage.clear();
     navigate(ROUTE.SIGNIN);
   };
 

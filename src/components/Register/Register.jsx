@@ -17,6 +17,15 @@ export const Register = ({ onRegister, apiMain }) => {
   const [apiError, setApiError] = useState('');
 
   const register = (data) => apiMain.register(data)
+    .then((user) => apiMain
+      .login({
+        email: data.email,
+        password: data.password,
+      })
+      .then(({ token }) => {
+        user.token = token;
+        return user;
+      }))
     .then(onRegister)
     .catch((err) => {
       setApiError(err.message);
