@@ -15,9 +15,7 @@ export const useForm = (
   const [isLocked, setLock] = useState(false);
 
   useEffect(() => {
-    // if (neededPreValidation) {
     setValid(neededPreValidation && checkValidity());
-    // }
   }, [formEl]);
 
   const process = (e) => {
