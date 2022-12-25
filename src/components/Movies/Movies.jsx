@@ -63,8 +63,8 @@ export const Movies = ({ apiFilms, apiMain }) => {
       apiMain.loadAllCards(),
     ])
       .then(([newCards]) => Promise
-        .all(newCards.map(({ movieId }) => apiMain.getCards({ ...searchParams, id: movieId, size: Infinity })))
-        .then(([savedCards]) => [newCards, savedCards]))
+        .all(newCards.flatMap(({ movieId }) => apiMain.getCards({ id: movieId })))
+        .then((savedCards) => [newCards, savedCards.filter((c) => c)]))
       .then(([newCards, savedCards]) => {
         const savedCardsMap = new Map(savedCards.map((card) => [card.movieId, card._id]));
         const updatedCards = newCards.map((card) => {

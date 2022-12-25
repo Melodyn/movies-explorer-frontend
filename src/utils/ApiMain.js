@@ -95,6 +95,10 @@ export class ApiMain {
   }) {
     await this.loadAllCards();
 
+    if (id !== null) {
+      return this._cards.find(({ movieId }) => movieId === id);
+    }
+
     const chunkSize = (size === 0) ? this._chunkSize : size;
     const startIdx = this._cursor;
     const endIdx = startIdx + chunkSize;
@@ -105,15 +109,10 @@ export class ApiMain {
           nameRU = '',
           nameEN = '',
           duration,
-          movieId,
         } = item;
 
         if (shorts && duration > 40) {
           return false;
-        }
-
-        if (id && id === movieId) {
-          return true;
         }
 
         return `${nameRU}${nameEN}`
