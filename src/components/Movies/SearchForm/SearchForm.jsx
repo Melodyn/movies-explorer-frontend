@@ -12,6 +12,7 @@ export const SearchForm = ({
 }) => {
   const { isLoading, ...params } = searchParams;
   const formRef = useRef(null);
+  const submitRef = useRef(null);
   const {
     values,
     isValid,
@@ -29,6 +30,12 @@ export const SearchForm = ({
   };
 
   const onSubmit = setSubmitHandler(onSearch);
+
+  useEffect(() => {
+    if (isValid && !isLocked) {
+      submitRef.current.click();
+    }
+  }, [values.shorts]);
 
   useEffect(() => {
     resetValues(searchParams);
@@ -63,6 +70,7 @@ export const SearchForm = ({
               type="submit"
               aria-label="Найти"
               disabled={!isValid || isLocked || isLoading}
+              ref={submitRef}
             />
           </fieldset>
           <fieldset className="search__fields search__fields_type_shorts">
