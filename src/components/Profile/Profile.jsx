@@ -29,12 +29,14 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
   } = useForm(formRef, {
     email: currentUser.email,
     name: currentUser.name,
-  });
+  }, false);
   const [apiError, setApiError] = useState('');
+  const [isSuccess, setIsSuccsess] = useState(false);
 
   const formIsValid = (isValid || isValid === null);
   const edit = (data) => apiMain.setInfo(data)
     .then(onEdit)
+    .then(() => setIsSuccsess(true))
     .catch((err) => {
       setApiError(err.message);
     });
@@ -46,6 +48,10 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
       name: currentUser.name,
     });
   }, [currentUser.email, currentUser.name]);
+
+  useEffect(() => {
+    setIsSuccsess(false);
+  }, [values.email, values.name]);
 
   return (
     <main className="main profile-form-container">
@@ -76,7 +82,7 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
                 onChange={setValues}
               />
             </label>
-            <hr />
+
             <label
               className="profile-form__label profile-form__label_borderless"
               htmlFor="email"
@@ -101,6 +107,13 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
         </div>
 
         <fieldset className="profile-form__fields profile-form__fields_flex">
+          {isSuccess && (
+            <span
+              className="profile-form__field-success"
+            >
+              Данные успешно обновлены
+            </span>
+          )}
           <span
             className="profile-form__field-error"
           >

@@ -93,7 +93,8 @@
   transition: .3s;
 }
 
-.profile-form__field-error {
+.profile-form__field-error,
+.profile-form__field-success {
   display: block;
   padding: 6px 0 20px;
   margin: 0;
@@ -102,6 +103,10 @@
   font-weight: 400;
   text-align: center;
   white-space: pre;
+}
+
+.profile-form__field-success {
+  color: #2BE080;
 }
 
 .profile-form__button {
