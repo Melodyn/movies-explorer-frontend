@@ -34,7 +34,7 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
   const [isSuccess, setIsSuccsess] = useState(false);
 
   const formIsValid = (isValid || isValid === null);
-  const edit = (data) => apiMain.setInfo(data)
+  const edit = (data) => apiMain.setProfile(data)
     .then(onEdit)
     .then(() => setIsSuccsess(true))
     .catch((err) => {

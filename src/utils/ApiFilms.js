@@ -36,7 +36,7 @@ export class ApiFilms {
       .then(processResponse);
   }
 
-  async load() {
+  async loadAllCards() {
     if (!this._wasLoaded) {
       await this._fetch('').then((films) => {
         this._films = films.map((film) => {
@@ -63,12 +63,12 @@ export class ApiFilms {
     return (this._cursor < this._searchResults.length);
   }
 
-  async get({
+  async getCards({
     size = 0,
     film = '',
     shorts = false,
   }) {
-    await this.load();
+    await this.loadAllCards();
 
     const chunkSize = size === 0 ? this._chunkSize : size;
     const startIdx = this._cursor;

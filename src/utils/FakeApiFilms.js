@@ -12,7 +12,7 @@ export class FakeApiFilms {
     this._cursor = 0;
   }
 
-  async load() {
+  async loadAllCards() {
     if (!this._wasLoaded) {
       this._films = fixtureFilms.map((film) => {
         const covers = [pepe, save];
@@ -38,12 +38,12 @@ export class FakeApiFilms {
     return (this._cursor < this._searchResults.length);
   }
 
-  async get({
+  async getCards({
     size = 0,
     film = '',
     shorts = false,
   }) {
-    await this.load();
+    await this.loadAllCards();
 
     const chunkSize = size === 0 ? this._chunkSize : size;
     const startIdx = this._cursor;

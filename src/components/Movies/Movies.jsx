@@ -24,6 +24,7 @@ export const Movies = ({ apiFilms, apiMain }) => {
   const [searchWasInit, setSearchWasInit] = useState(hasSavedSearch);
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [apiHasError, setApiHasError] = useState(false);
+  const [hasMore, setHasMore] = useState(apiFilms.hasMore());
   const isEmpty = (cards.length === 0);
 
   const onSearch = async (newParams) => {
@@ -55,25 +56,25 @@ export const Movies = ({ apiFilms, apiMain }) => {
     }
 
     Promise.all([
-      apiFilms.get({
+      apiFilms.getCards({
         ...searchParams,
         size,
       }),
-      apiMain.load(),
+      apiMain.loadAllCards(),
     ])
       .then(([newCards]) => Promise
-        .all(newCards.map(({ movieId }) => apiMain.get({ ...searchParams, id: movieId, size: Infinity })))
-        .then((savedCards) => [
-          newCards,
-          savedCards.flatMap((card) => {
-            card.saved = true;
-            card.id = card._id;
-            return card;
-          }),
-        ]))
+        .all(newCards.map(({ movieId }) => apiMain.getCards({ ...searchParams, id: movieId, size: Infinity })))
+        .then(([savedCards]) => [newCards, savedCards]))
       .then(([newCards, savedCards]) => {
-        const savedCardsSet = new Set(savedCards.map((card) => card.movieId));
-        const updatedCards = newCards.map((card) => ({ ...card, saved: savedCardsSet.has(card.movieId) }));
+        const savedCardsMap = new Map(savedCards.map((card) => [card.movieId, card._id]));
+        const updatedCards = newCards.map((card) => {
+          const isSaved = savedCardsMap.has(card.id);
+          card.saved = isSaved;
+          if (isSaved) {
+            card._id = savedCardsMap.get(card.id);
+          }
+          return card;
+        });
 
         if (reset) {
           setCards(() => updatedCards);
@@ -81,6 +82,7 @@ export const Movies = ({ apiFilms, apiMain }) => {
           setCards((prev) => prev.concat(updatedCards));
         }
 
+        setHasMore(apiFilms.hasMore());
         setApiHasError(false);
         onEndSearch();
       })
@@ -97,7 +99,8 @@ export const Movies = ({ apiFilms, apiMain }) => {
   };
 
   const onClickSave = (film, onEnd) => {
-    apiMain.saveOrRemove(film)
+    const methodPromise = film.saved ? apiMain.remove(film) : apiMain.save(film);
+    methodPromise
       .then((updatedFilm) => {
         setCards((crds) => crds.map((flm) => (flm.movieId === updatedFilm.movieId ? updatedFilm : flm)));
       })
@@ -133,7 +136,7 @@ export const Movies = ({ apiFilms, apiMain }) => {
         cards={cards}
         loadMore={loadMore}
         onClickSave={onClickSave}
-        hasMore={apiFilms.hasMore()}
+        hasMore={hasMore}
         isEmpty={isEmpty}
         isLoading={searchParams.isLoading}
         searchAccepted={searchWasInit}

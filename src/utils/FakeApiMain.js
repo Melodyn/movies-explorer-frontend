@@ -18,7 +18,7 @@ export class FakeApiMain {
     return this._profile;
   }
 
-  setInfo({ name, email }) {
+  setProfile({ name, email }) {
     this._profile = {
       ...this._profile,
       ...({ name, email }),
@@ -53,7 +53,7 @@ export class FakeApiMain {
     return (this._cursor < this._searchResults.length);
   }
 
-  async load() {
+  async loadAllCards() {
     if (!this._wasLoaded) {
       const savedCards = localStorage.getItem('savedCards') || '[]';
       this._cards = JSON.parse(savedCards);
@@ -61,13 +61,13 @@ export class FakeApiMain {
     }
   }
 
-  async get({
+  async getCards({
     size = 0,
     film = '',
     shorts = false,
     id = null,
   }) {
-    await this.load();
+    await this.loadAllCards();
 
     const chunkSize = size === 0 ? this._chunkSize : size;
     const startIdx = this._cursor;
@@ -107,7 +107,7 @@ export class FakeApiMain {
   }
 
   async saveOrRemove(card) {
-    await this.load();
+    await this.loadAllCards();
     const { saved = false, ...fields } = card;
     const updatedCard = saved ? fields : ({ ...fields, saved: true });
     if (saved) {

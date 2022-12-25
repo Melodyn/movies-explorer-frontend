@@ -47,7 +47,7 @@ export class ApiMain {
     return this._fetch('users/me');
   }
 
-  setInfo({ name, email }) {
+  setProfile({ name, email }) {
     return this._fetch('users/me', HTTP_METHOD.PATCH, { name, email });
   }
 
@@ -78,7 +78,7 @@ export class ApiMain {
     return (this._cursor < this._searchResults.length);
   }
 
-  async load() {
+  async loadAllCards() {
     if (!this._wasLoaded) {
       await this._fetch('movies').then((cards) => {
         this._cards = cards;
@@ -87,13 +87,13 @@ export class ApiMain {
     }
   }
 
-  async get({
+  async getCards({
     size = 0,
     film = '',
     shorts = false,
     id = null,
   }) {
-    await this.load();
+    await this.loadAllCards();
 
     const chunkSize = (size === 0) ? this._chunkSize : size;
     const startIdx = this._cursor;
@@ -132,24 +132,28 @@ export class ApiMain {
     return cards;
   }
 
-  async saveOrRemove(card) {
-    await this.load();
+  async save(card) {
+    await this.loadAllCards();
 
-    const { saved = false, _id = '', ...fields } = card;
-
-    if (saved) {
-      return this._fetch(`movies/${_id}`, HTTP_METHOD.DELETE)
-        .then((deletedCard) => {
-          this._cards = this._cards.filter((crd) => (crd.movieId !== deletedCard.movieId));
-          return deletedCard;
-        });
-    }
+    const { saved, _id, ...fields } = card;
 
     return this._fetch('movies', HTTP_METHOD.POST, fields)
       .then((newCard) => {
         newCard.saved = true;
+        newCard.id = newCard.movieId;
         this._cards = this._cards.concat(newCard);
         return newCard;
+      });
+  }
+
+  async remove(card) {
+    await this.loadAllCards();
+
+    return this._fetch(`movies/${card._id}`, HTTP_METHOD.DELETE)
+      .then((deletedCard) => {
+        deletedCard.id = deletedCard.movieId;
+        this._cards = this._cards.filter((crd) => (crd.movieId !== deletedCard.movieId));
+        return deletedCard;
       });
   }
 }
