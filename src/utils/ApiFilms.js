@@ -17,8 +17,9 @@ export class ApiFilms {
   constructor(config) {
     this._config = config;
     this._config.filmsBaseURL = (new URL(this._config.apiFilmsBaseURL)).origin;
-    this._films = [];
-    this._wasLoaded = false;
+    const savedFilmsRaw = localStorage.getItem('films_beat') || '[]';
+    this._films = JSON.parse(savedFilmsRaw);
+    this._wasLoaded = (this._films.length > 0);
     this._searchResults = [];
     this._chunkSize = 3;
     this._cursor = 0;
@@ -38,15 +39,15 @@ export class ApiFilms {
 
   async loadAllCards() {
     if (!this._wasLoaded) {
-      await this._fetch('').then((films) => {
-        this._films = films.map((film) => {
-          film.thumbnail = `${this._config.filmsBaseURL}${film.image.url}`;
-          film.image = `${this._config.filmsBaseURL}${film.image.url}`;
-          film.movieId = film.id;
-          return film;
-        });
+      const films = await this._fetch('');
+      this._films = films.map((film) => {
+        film.thumbnail = `${this._config.filmsBaseURL}${film.image.url}`;
+        film.image = `${this._config.filmsBaseURL}${film.image.url}`;
+        film.movieId = film.id;
+        return film;
       });
       this._wasLoaded = true;
+      localStorage.setItem('films_beat', JSON.stringify(this._films));
     }
   }
 

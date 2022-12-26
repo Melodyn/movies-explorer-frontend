@@ -16,9 +16,10 @@ const processResponse = (res) => {
 export class ApiMain {
   constructor(config) {
     this._config = config;
-    this._cards = [];
+    const savedFilmsRaw = localStorage.getItem('films_saved') || '[]';
+    this._cards = JSON.parse(savedFilmsRaw);
     this._searchResults = [];
-    this._wasLoaded = false;
+    this._wasLoaded = this._cards.length > 0;
     this._chunkSize = 3;
     this._cursor = 0;
 
@@ -80,10 +81,9 @@ export class ApiMain {
 
   async loadAllCards() {
     if (!this._wasLoaded) {
-      await this._fetch('movies').then((cards) => {
-        this._cards = cards;
-        this._wasLoaded = true;
-      });
+      this._cards = await this._fetch('movies');
+      this._wasLoaded = true;
+      localStorage.setItem('films_saved', JSON.stringify(this._cards));
     }
   }
 
@@ -141,6 +141,7 @@ export class ApiMain {
         newCard.saved = true;
         newCard.id = newCard.movieId;
         this._cards = this._cards.concat(newCard);
+        localStorage.setItem('films_saved', JSON.stringify(this._cards));
         return newCard;
       });
   }
@@ -152,6 +153,7 @@ export class ApiMain {
       .then((deletedCard) => {
         deletedCard.id = deletedCard.movieId;
         this._cards = this._cards.filter((crd) => (crd.movieId !== deletedCard.movieId));
+        localStorage.setItem('films_saved', JSON.stringify(this._cards));
         return deletedCard;
       });
   }
