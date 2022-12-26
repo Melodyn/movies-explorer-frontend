@@ -29,14 +29,18 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
   } = useForm(formRef, {
     email: currentUser.email,
     name: currentUser.name,
-  }, false);
+  });
   const [apiError, setApiError] = useState('');
   const [isSuccess, setIsSuccsess] = useState(false);
+  const [isModified, setIsModified] = useState(false);
 
   const formIsValid = (isValid || isValid === null);
   const edit = (data) => apiMain.setProfile(data)
     .then(onEdit)
-    .then(() => setIsSuccsess(true))
+    .then(() => {
+      setIsSuccsess(true);
+      setIsModified(false);
+    })
     .catch((err) => {
       setApiError(err.message);
     });
@@ -51,6 +55,7 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
 
   useEffect(() => {
     setIsSuccsess(false);
+    setIsModified((values.email !== currentUser.email) || (values.name !== currentUser.name));
   }, [values.email, values.name]);
 
   return (
@@ -125,7 +130,7 @@ export const Profile = ({ onLogout, onEdit, apiMain }) => {
               { animation: (isValid && !isLocked) },
               'button profile-form__button profile-form__button_action_edit',
             )}
-            disabled={!formIsValid || isLocked}
+            disabled={!isModified || !formIsValid || isLocked}
           >
             Редактировать
           </button>

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 export const useForm = (
   formRef,
   initValues = {},
-  neededPreValidation = true,
 ) => {
   const formEl = formRef.current;
   const formFields = formEl === null ? [] : Array.from(formRef.current.querySelectorAll('.form-field'));
@@ -15,7 +14,7 @@ export const useForm = (
   const [isLocked, setLock] = useState(false);
 
   useEffect(() => {
-    setValid(neededPreValidation && checkValidity());
+    setValid(checkValidity());
   }, [formEl]);
 
   const process = (e) => {
@@ -62,7 +61,7 @@ export const useForm = (
     setSubmitHandler,
     resetValues: (newValues) => {
       setValues(newValues);
-      setValid(neededPreValidation && checkValidity());
+      setValid(checkValidity());
     },
   };
 };
