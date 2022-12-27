@@ -16,6 +16,10 @@
   list-style-type: none;
 }
 
+.cards__item {
+  max-width: 558px;
+}
+
 .movies__more {
   width: 320px;
   height: 36px;
@@ -43,7 +47,7 @@
 
 @media screen and (max-width: 767px) {
   .cards {
-    max-width: 400px;
+    max-width: 558px;
     margin: 0 auto;
     grid-template-columns: minmax(284px, 1fr);
   }

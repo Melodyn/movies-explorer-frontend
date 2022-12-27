@@ -4,7 +4,9 @@
 
 Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
-* Макет: https://www.figma.com/file/bJg1QeCom9gibMzWr3MUec/Diploma?node-id=932%3A3320&t=IH9EZlwnOoIFyg1r-0
+* Макет: https://www.figma.com/file/VSiB5ljJFd5AwAZObWMgC5/Diploma_My?node-id=891%3A3857&t=miKZfdWuTp0Y1iFy-1
+* Проект: https://diploma.melodyn.nomoredomains.club
+* Pull Request: https://github.com/Melodyn/movies-explorer-frontend/pull/4
 
 ## Технологии
 

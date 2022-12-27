@@ -61,6 +61,10 @@
   flex-direction: row;
 }
 
+.form-field:disabled {
+  color: #c2c2c2;
+}
+
 /* button */
 
 .button {
@@ -70,6 +74,10 @@
   margin: 0;
   background-color: transparent;
   cursor: pointer;
+}
+
+.button:disabled {
+  cursor: default;
 }
 
 .button_bg_accent {
@@ -103,7 +111,7 @@
   transition: .3s;
 }
 
-.animation:hover {
+.animation:not(:disabled):hover {
   opacity: .7;
 }
 

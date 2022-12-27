@@ -3,9 +3,13 @@
 // эти правила сложно обойти правильно, пусть будут отключены
 import './NavTab.css';
 import cn from 'classnames';
+import { useContext } from 'react';
 import { Navigation } from '../../Navigation/Navigation';
+import { UserContext } from '../../../contexts/User';
 
-export const NavTab = ({ isAuthorized, isOpen, onClose }) => {
+export const NavTab = ({ isOpen, onClose }) => {
+  const currentUser = useContext(UserContext);
+  const isAuthorized = currentUser.isAuth();
   if (!isAuthorized) return null;
   const className = cn(
     'navtab',
@@ -27,7 +31,6 @@ export const NavTab = ({ isAuthorized, isOpen, onClose }) => {
         />
 
         <Navigation
-          isAuthorized={isAuthorized}
           place="navtab"
           onClick={onClose}
         />

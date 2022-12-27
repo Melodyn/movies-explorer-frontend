@@ -1,4 +1,4 @@
-REMOTE=melodyn@51.250.0.137
+REMOTE=melodyn@84.201.152.223
 DIR_FRONTEND=/home/melodyn/diploma/frontend
 
 setup: install-dependencies run
