@@ -13,9 +13,6 @@ import { useStorageToken } from '../../hooks/useStorageToken';
 import { ROUTE } from '../../utils/constants';
 import { ApiMain } from '../../utils/ApiMain';
 import { ApiFilms } from '../../utils/ApiFilms';
-// Для локальной разработки без интернета
-// import { FakeApiMain } from '../../utils/FakeApiMain';
-// import { FakeApiFilms } from '../../utils/FakeApiFilms';
 // components
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { Header } from '../Header/Header';
@@ -33,9 +30,6 @@ import { Profile } from '../Profile/Profile';
 export const App = ({ config }) => {
   const apiMain = new ApiMain(config);
   const apiFilms = new ApiFilms(config);
-  // Для локальной разработки без интернета
-  // const apiMain = new FakeApiMain(config);
-  // const apiFilms = new FakeApiFilms(config);
 
   const [isNavtabOpened, setIsNavtabOpened] = useState(false);
   const [token, saveToken] = useStorageToken();
@@ -77,10 +71,10 @@ export const App = ({ config }) => {
     updateUser(user);
   };
 
-  const onLogout = () => {
+  const onLogout = (navigateTo = ROUTE.SIGNIN) => {
     updateUser(defaultUser);
     localStorage.clear();
-    navigate(ROUTE.SIGNIN);
+    navigate(navigateTo);
   };
 
   useEffect(() => {
@@ -92,12 +86,10 @@ export const App = ({ config }) => {
           updateUser(user);
         })
         .catch(() => {
-          updateUser(defaultUser);
-          navigate(ROUTE.MAIN);
+          onLogout(ROUTE.MAIN);
         });
     } else {
-      updateUser(defaultUser);
-      navigate(ROUTE.MAIN);
+      onLogout(ROUTE.MAIN);
     }
   }, [currentUser.token]);
 
